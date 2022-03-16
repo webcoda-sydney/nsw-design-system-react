@@ -119,7 +119,7 @@ export const SubNavHeader = ({
           <span className="sr-only"> to previous menu</span>
         </span>
       </button>
-      <button type="button" className="nsw-icon-button js-close-navigation" aria-expanded="true">
+      <button type="button" className="nsw-icon-button js-close-nav" aria-expanded="true">
         <i className="material-icons nsw-material-icons" focusable="false" aria-hidden="true">close</i>
         <span className="sr-only">Close Menu</span>
       </button>
