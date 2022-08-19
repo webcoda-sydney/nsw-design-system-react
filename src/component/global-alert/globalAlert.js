@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { initSite } from 'nsw-design-system/src/main';
 
 /**
  * All different kind of button options
@@ -32,15 +31,18 @@ export class GlobalAlert extends React.PureComponent {
     this.ctaText = ctaText;
     this.ctaHref = ctaHref;
     this.as = as;
+    this.ref = React.createRef()
   }
 
-  componentDidMount() {
-    initSite();
+  async componentDidMount() {
+    const { GlobalAlert } = await import('nsw-design-system/src/main')
+    new GlobalAlert(this.ref.current).init()
   }
 
   render() {
     return (
       <div
+        ref={this.ref}
         className={`nsw-global-alert ${this.className} ${options[this.as]}`}
         {...this.attributeOptions}
       >
@@ -57,7 +59,7 @@ export class GlobalAlert extends React.PureComponent {
               : ''
             }
           </p>
-          <button type="button" className="nsw-icon-button">
+          <button type="button" className="nsw-icon-button js-close-alert">
             <span className="material-icons nsw-material-icons" focusable="false" aria-hidden="true">close</span>
             <span className="sr-only">Close message</span>
           </button>

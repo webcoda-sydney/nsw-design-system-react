@@ -1,31 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { uniqueId } from 'nsw-design-system/src/global/scripts/helpers/utilities';
+import useIdExtended from '../../hooks/useIdExtended';'../../hooks/useIdExtended'
 
-export class Accordion extends React.PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isOpen: false
-    }
+export const Accordion = (props) =>{
+    const [isOpen, setIsOpen] = useState(false)
+    const uID = useIdExtended('accordion')
     const {header, body, closed, className = '', ...attributeOptions} = props
-    this.uID = uniqueId('accordion');
-    this.className = className;
-    this.attributeOptions = attributeOptions;
-  }
 
-  render() {
     return (
       <React.Fragment>
         <div className='nsw-accordion__title'>
           <button
             type='button'
-            aria-expanded={ this.state.isOpen }
-            aria-controls={ this.uID }
-            className={`nsw-accordion__button ${this.state.isOpen ? 'is-open' : ''}`}
-            onClick={() => this.setState({ isOpen: !this.state.isOpen })}
+            aria-expanded={ isOpen }
+            aria-controls={ uID }
+            className={`nsw-accordion__button ${isOpen ? 'is-open' : ''}`}
+            onClick={() => setIsOpen((prevState) => !prevState )}
           >
-            {this.props.header}
+            {header}
             <i
               className='material-icons nsw-material-icons nsw-accordion__icon'
               focusable='false'
@@ -36,15 +28,14 @@ export class Accordion extends React.PureComponent {
           </button>
         </div>
         <div className="nsw-accordion__content"
-             id={ this.uID }
-             hidden={ this.state.isOpen ? '' : 'hidden' }>
+             id={uID}
+             hidden={ isOpen ? '' : 'hidden' }>
           <div className="nsw-wysiwyg-content">
-            {this.props.body}
+            {body}
           </div>
         </div>
       </React.Fragment>
     );
-  }
 }
 
 Accordion.propTypes = {

@@ -36,7 +36,7 @@ InpageNavLinksItem.propTypes = {
 export const InPageNavLinks = ({
   title, links, ariaLabel, className = '', ...attributeOptions
 }) => (
-  <nav className={`nsw-in-page-nav ${className}`} aria-labelled-by={ariaLabel} {...attributeOptions}>
+  <nav className={`nsw-in-page-nav ${className}`} aria-labelledby={ariaLabel} {...attributeOptions}>
     <div id={ariaLabel} className="nsw-in-page-nav__title">{ title }</div>
 
     <ul>
