@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import useIdExtended from '../../hooks/useIdExtended'
 
@@ -13,13 +13,41 @@ import useIdExtended from '../../hooks/useIdExtended'
  */
 
 export const MainNav = (props) => {
-  const { navItems, megaMenu, className = '', ...attributeOptions } = props
+  const {
+    navItems,
+    megaMenu,
+    className = '',
+    renderLink,
+    isCloseWhenOutsideClick = true,
+    ...attributeOptions
+  } = props
+
+  const refMainNavList = useRef(null)
+
+  const closeActiveSubNav = () => {
+    const link = refMainNavList.current.querySelector('ul > li > a.active')
+    link?.click()
+    return link
+  }
 
   useEffect(() => {
-    (async () => {
+    ;(async () => {
       const { Navigation } = await import('nsw-design-system/src/main')
       new Navigation().init()
     })()
+
+    if (isCloseWhenOutsideClick) {
+      const outsideClickToCloseActiveSubNav = (e) => {
+        if (!e.target.closest('.nsw-main-nav__list')) {
+          closeActiveSubNav()
+        }
+      }
+      document.addEventListener('click', outsideClickToCloseActiveSubNav)
+
+      return () => {
+        document.removeEventListener('click', outsideClickToCloseActiveSubNav)
+      }
+    }
   }, [])
   return (
     <nav
@@ -45,7 +73,7 @@ export const MainNav = (props) => {
           <span className='sr-only'>Close Menu</span>
         </button>
       </div>
-      <ul className='nsw-main-nav__list'>
+      <ul ref={refMainNavList} className='nsw-main-nav__list'>
         {navItems.map((navItem, index) => (
           <li
             key={
@@ -54,27 +82,33 @@ export const MainNav = (props) => {
                 : navItem.url + navItem.text + index
             }
           >
-            <a href={navItem.url}>
-              <span>{navItem.text}</span>
-              {navItem.subNav ? (
-                <span
-                  className='material-icons nsw-material-icons nsw-main-nav__link-icon'
-                  focusable='false'
-                  aria-hidden='true'
-                >
-                  keyboard_arrow_right
-                </span>
-              ) : (
-                ''
-              )}
-            </a>
+            {renderLink ? (
+              renderLink(navItem)
+            ) : (
+              <a href={navItem.url} target={navItem.target}>
+                <span>{navItem.text}</span>
+                {navItem.subNav ? (
+                  <span
+                    className='material-icons nsw-material-icons nsw-main-nav__link-icon'
+                    focusable='false'
+                    aria-hidden='true'
+                  >
+                    keyboard_arrow_right
+                  </span>
+                ) : (
+                  ''
+                )}
+              </a>
+            )}
             {navItem.subNav ? (
               <SubNav
                 subNav={navItem.subNav}
                 url={navItem.url}
                 text={navItem.text}
+                target={navItem.target}
                 description={navItem.description}
                 id={navItem.id}
+                renderLink={renderLink}
               />
             ) : (
               ''
@@ -92,14 +126,16 @@ MainNav.propTypes = {
       url: PropTypes.string,
       text: PropTypes.string,
       description: PropTypes.string,
-      subNav: PropTypes.arrayOf
+      target: PropTypes.string,
+      subNav: PropTypes.arrayOf,
     })
   ).isRequired,
   megaMenu: PropTypes.bool,
-  className: PropTypes.string
+  className: PropTypes.string,
+  renderLink: PropTypes.func
 }
 
-export const SubNavHeader = ({ url, text, description, id }) => (
+export const SubNavHeader = ({ url, text, description, id, target }) => (
   <>
     <div className='nsw-main-nav__header'>
       <button
@@ -136,7 +172,7 @@ export const SubNavHeader = ({ url, text, description, id }) => (
       </button>
     </div>
     <div className='nsw-main-nav__title'>
-      <a href={url}>
+      <a href={url} target={target}>
         <span>{text}</span>
         <span
           className='material-icons nsw-material-icons'
@@ -155,10 +191,19 @@ SubNavHeader.propTypes = {
   url: PropTypes.string,
   text: PropTypes.string,
   description: PropTypes.string,
-  id: PropTypes.string
+  id: PropTypes.string,
+  target: PropTypes.string,
 }
 
-export const SubNav = ({ id = '', subNav, url, text, description }) => {
+export const SubNav = ({
+  id = '',
+  subNav,
+  url,
+  text,
+  description,
+  target,
+  renderLink
+}) => {
   const _id = id || useIdExtended()
 
   return (
@@ -168,26 +213,30 @@ export const SubNav = ({ id = '', subNav, url, text, description }) => {
       role='region'
       aria-label={text}
     >
-      <SubNavHeader url={url} text={text} description={description} id={_id} />
+      <SubNavHeader url={url} text={text} description={description} id={_id} target={target} />
       <ul className='nsw-main-nav__sub-list'>
         {subNav.map((subNavItem, index) => {
           const subNavId = _id + index
           return (
             <li key={subNavItem.url + subNavItem.text + index}>
-              <a href={subNavItem.url}>
-                <span>{subNavItem.text}</span>
-                {subNavItem.subNav ? (
-                  <span
-                    className='material-icons nsw-material-icons nsw-main-nav__link-icon'
-                    focusable='false'
-                    aria-hidden='true'
-                  >
-                    keyboard_arrow_right
-                  </span>
-                ) : (
-                  ''
-                )}
-              </a>
+              {renderLink ? (
+                renderLink(subNavItem)
+              ) : (
+                <a href={subNavItem.url} target={subNavItem.target}>
+                  <span>{subNavItem.text}</span>
+                  {subNavItem.subNav ? (
+                    <span
+                      className='material-icons nsw-material-icons nsw-main-nav__link-icon'
+                      focusable='false'
+                      aria-hidden='true'
+                    >
+                      keyboard_arrow_right
+                    </span>
+                  ) : (
+                    ''
+                  )}
+                </a>
+              )}
 
               {subNavItem.subNav ? (
                 <div
@@ -205,23 +254,28 @@ export const SubNav = ({ id = '', subNav, url, text, description }) => {
                   <ul className='nsw-main-nav__sub-list'>
                     {subNavItem.subNav.map((subSubNavItem, index) => (
                       <li key={subSubNavItem.url + subSubNavItem.text + index}>
-                        <a
-                          href={subSubNavItem.url}
-                          className='nsw-subnavigation__link'
-                        >
-                          <span>{subSubNavItem.text}</span>
-                          {subSubNavItem.subNav ? (
-                            <span
-                              className='material-icons nsw-material-icons nsw-main-nav__link-icon'
-                              focusable='false'
-                              aria-hidden='true'
-                            >
-                              keyboard_arrow_right
-                            </span>
-                          ) : (
-                            ''
-                          )}
-                        </a>
+                        {renderLink ? (
+                          renderLink(subSubNavItem)
+                        ) : (
+                          <a
+                            href={subSubNavItem.url}
+                            target={subSubNavItem.target}
+                            className='nsw-subnavigation__link'
+                          >
+                            <span>{subSubNavItem.text}</span>
+                            {subSubNavItem.subNav ? (
+                              <span
+                                className='material-icons nsw-material-icons nsw-main-nav__link-icon'
+                                focusable='false'
+                                aria-hidden='true'
+                              >
+                                keyboard_arrow_right
+                              </span>
+                            ) : (
+                              ''
+                            )}
+                          </a>
+                        )}
                       </li>
                     ))}
                   </ul>
@@ -247,5 +301,7 @@ SubNav.propTypes = {
   ).isRequired,
   url: PropTypes.string,
   text: PropTypes.string,
-  description: PropTypes.string
+  description: PropTypes.string,
+  renderLink: PropTypes.func,
+  target: PropTypes.string,
 }
