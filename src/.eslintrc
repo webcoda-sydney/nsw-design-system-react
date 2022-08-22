@@ -1,5 +1,10 @@
 {
-  "env": {
-    "jest": true
-  }
+	"env": {
+		"es2021": true,
+		"node": true,
+		// we need document and window API available
+		"browser": true,
+		"jest": true
+	},
+	"extends": ["prettier"]
 }
