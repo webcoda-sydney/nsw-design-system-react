@@ -3397,10 +3397,11 @@ const Mt = ({
   left: o,
   right: c,
   center: l,
-  style: u = "default"
+  children: u,
+  style: p = "default"
 }) => /* @__PURE__ */ g("figure", {
   className: `nsw-media${o === void 0 || o === "none" ? "" : ` nsw-media--left-${o}`}
-		${St[u]}
+		${St[p]}
 		${c === void 0 || c === "none" ? "" : ` nsw-media--right-${c}`}
 		${l === void 0 || l === "none" ? "" : ` nsw-media--${l}`}`,
   children: [s ? /* @__PURE__ */ t("div", {
@@ -3414,7 +3415,7 @@ const Mt = ({
   }) : "", r ? /* @__PURE__ */ t("img", {
     src: r,
     alt: a
-  }) : "", /* @__PURE__ */ t("figcaption", {
+  }) : "", u, !!i && /* @__PURE__ */ t("figcaption", {
     children: i
   })]
 });

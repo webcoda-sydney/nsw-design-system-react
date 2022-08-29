@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types'
+import type { ReactNode } from 'react'
 
 /**
  * Media combines visual elements with text to give context and alignment within content.
@@ -45,6 +46,11 @@ export interface MediaProps {
 	 * Media positioned to the center in percentage width with increments of 60, 70, 80, 90
 	 */
 	center?: 'none' | '60' | '70' | '80' | '90'
+
+	/**
+	 * Anything inside
+	 */
+	children: ReactNode
 }
 export const Media = ({
 	image,
@@ -54,6 +60,7 @@ export const Media = ({
 	left,
 	right,
 	center,
+	children,
 	style = 'default'
 }: MediaProps) => (
 	<figure
@@ -79,7 +86,8 @@ export const Media = ({
 			''
 		)}
 		{image ? <img src={image} alt={title} /> : ''}
-		<figcaption>{caption}</figcaption>
+		{children}
+		{!!caption && <figcaption>{caption}</figcaption>}
 	</figure>
 )
 

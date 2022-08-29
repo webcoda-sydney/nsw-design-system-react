@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import type { ReactNode } from 'react';
 export interface MediaProps {
     /**
      * The file location of the image file
@@ -32,9 +33,13 @@ export interface MediaProps {
      * Media positioned to the center in percentage width with increments of 60, 70, 80, 90
      */
     center?: 'none' | '60' | '70' | '80' | '90';
+    /**
+     * Anything inside
+     */
+    children: ReactNode;
 }
 export declare const Media: {
-    ({ image, video, title, caption, left, right, center, style }: MediaProps): JSX.Element;
+    ({ image, video, title, caption, left, right, center, children, style }: MediaProps): JSX.Element;
     propTypes: {
         style: PropTypes.Requireable<string>;
         video: PropTypes.Requireable<string>;
