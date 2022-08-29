@@ -57,7 +57,7 @@ declare const Card: {
         date: PropTypes.Requireable<string>;
         image: PropTypes.Requireable<string>;
         imageAlt: PropTypes.Requireable<string>;
-        headline: PropTypes.Validator<string>;
+        headline: PropTypes.Validator<string | number | boolean | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
         highlight: PropTypes.Requireable<boolean>;
         className: PropTypes.Requireable<string>;
         children: PropTypes.Requireable<PropTypes.ReactNodeLike>;

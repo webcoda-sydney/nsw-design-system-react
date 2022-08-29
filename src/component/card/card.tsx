@@ -114,7 +114,7 @@ Card.propTypes = {
 	date: PropTypes.string,
 	image: PropTypes.string,
 	imageAlt: PropTypes.string,
-	headline: PropTypes.string.isRequired,
+	headline: PropTypes.node.isRequired,
 	highlight: PropTypes.bool,
 	className: PropTypes.string,
 	children: PropTypes.node

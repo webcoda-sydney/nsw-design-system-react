@@ -1499,7 +1499,7 @@ Ln.propTypes = {
   date: e.exports.string,
   image: e.exports.string,
   imageAlt: e.exports.string,
-  headline: e.exports.string.isRequired,
+  headline: e.exports.node.isRequired,
   highlight: e.exports.bool,
   className: e.exports.string,
   children: e.exports.node
