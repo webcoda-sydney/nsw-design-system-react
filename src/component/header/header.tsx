@@ -32,7 +32,7 @@ export interface HeaderProps {
 	/**
 	 * Event handler for header search
 	 */
-	onSubmit: (e: React.FormEvent) => void
+	onSubmit?: (e: React.FormEvent) => void
 }
 export const Header = (props: HeaderProps) => {
 	const {

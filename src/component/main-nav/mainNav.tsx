@@ -125,7 +125,7 @@ export const MainNav = (props: MainNavProps) => {
 							) : (
 								<a href={navItem.url} target={navItem.target}>
 									<span>{navItem.text}</span>
-									{navItem.subNav ? (
+									{!!navItem.subNav?.length ? (
 										<span
 											className='material-icons nsw-material-icons nsw-main-nav__link-icon'
 											aria-hidden='true'
@@ -137,7 +137,7 @@ export const MainNav = (props: MainNavProps) => {
 									)}
 								</a>
 							)}
-							{navItem.subNav ? (
+							{!!navItem.subNav?.length ? (
 								<SubNav
 									subNav={navItem.subNav}
 									url={navItem.url}
@@ -278,7 +278,7 @@ export const SubNav = ({
 										target={subNavItem.target}
 									>
 										<span>{subNavItem.text}</span>
-										{subNavItem.subNav ? (
+										{!!subNavItem.subNav?.length ? (
 											<span
 												className='material-icons nsw-material-icons nsw-main-nav__link-icon'
 												aria-hidden='true'
@@ -291,7 +291,7 @@ export const SubNav = ({
 									</a>
 								)}
 
-								{subNavItem.subNav ? (
+								{!!subNavItem.subNav?.length ? (
 									<div
 										className='nsw-main-nav__sub-nav'
 										id={`sub-nav-${subNavId}`}
@@ -333,7 +333,7 @@ export const SubNav = ({
 																		subSubNavItem.text
 																	}
 																</span>
-																{subSubNavItem.subNav ? (
+																{!!subSubNavItem.subNav?.length ? (
 																	<span
 																		className='material-icons nsw-material-icons nsw-main-nav__link-icon'
 																		aria-hidden='true'
