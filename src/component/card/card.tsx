@@ -20,7 +20,7 @@ export interface CardProps {
 	/**
 	 * Card style
 	 */
-	style: string
+	style?: string
 
 	/**
 	 * The date (optional)
