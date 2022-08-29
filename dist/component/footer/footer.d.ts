@@ -6,6 +6,7 @@ import type { ReactNode } from 'react';
 export interface FooterLinksItem {
     url: string;
     text: string;
+    target?: HTMLAnchorElement['target'];
 }
 export interface FooterLinksProps {
     /**

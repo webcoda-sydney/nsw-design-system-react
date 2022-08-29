@@ -1738,13 +1738,15 @@ const zn = ({
   ...i,
   children: r.map(({
     url: a,
-    text: o
-  }, c) => /* @__PURE__ */ t("li", {
+    text: o,
+    target: c
+  }, l) => /* @__PURE__ */ t("li", {
     children: /* @__PURE__ */ t("a", {
       href: a,
+      target: c,
       children: o
     })
-  }, a + o + c))
+  }, a + o + l))
 });
 zn.propTypes = {
   footerLinks: e.exports.arrayOf(e.exports.shape({
@@ -1771,13 +1773,15 @@ const Bn = ({
     className: "nsw-footer__list",
     children: s.map(({
       url: o,
-      text: c
-    }, l) => /* @__PURE__ */ t("li", {
+      text: c,
+      target: l
+    }, u) => /* @__PURE__ */ t("li", {
       children: /* @__PURE__ */ t("a", {
         href: o,
+        target: l,
         children: c
       })
-    }, o + c + l))
+    }, o + c + u))
   })]
 });
 Bn.propTypes = {

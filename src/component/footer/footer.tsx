@@ -7,6 +7,7 @@ import type { ReactNode } from 'react'
 export interface FooterLinksItem {
 	url: string
 	text: string
+	target?: HTMLAnchorElement['target']
 }
 export interface FooterLinksProps {
 	/**
@@ -31,9 +32,9 @@ export const FooterLinks = ({
 	...attributeOptions
 }: FooterLinksProps) => (
 	<ul className={className} {...attributeOptions}>
-		{footerLinks.map(({ url, text }, index) => (
+		{footerLinks.map(({ url, text, target }, index) => (
 			<li key={url+text+index}>
-				<a href={url}>{text}</a>
+				<a href={url} target={target}>{text}</a>
 			</li>
 		))}
 	</ul>
@@ -83,9 +84,9 @@ export const FooterSectionGroup = ({
 			<a href={heading.url}>{heading.text}</a>
 		</h3>
 		<ul className='nsw-footer__list'>
-			{sectionLinks.map(({ url, text }, index) => (
+			{sectionLinks.map(({ url, text, target }, index) => (
 				<li key={url + text + index}>
-					<a href={url}>{text}</a>
+					<a href={url} target={target}>{text}</a>
 				</li>
 			))}
 		</ul>
