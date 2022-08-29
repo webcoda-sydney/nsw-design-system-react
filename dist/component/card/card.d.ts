@@ -35,7 +35,7 @@ export interface CardProps {
     /**
      * Title for card
      */
-    headline: string;
+    headline: ReactNode;
     /**
      * Adds highlight bar if true
      */
