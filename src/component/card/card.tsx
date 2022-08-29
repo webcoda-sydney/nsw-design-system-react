@@ -10,6 +10,8 @@ export interface CardProps {
 	 */
 	link?: string
 
+	linkTarget?: HTMLAnchorElement['target']
+
 	/**
 	 * The tag (optional)
 	 */
@@ -62,6 +64,7 @@ export interface CardProps {
 
 const Card = ({
 	link,
+	linkTarget,
 	style = 'white',
 	headline,
 	highlight,
@@ -77,7 +80,7 @@ const Card = ({
 
 	if (link !== undefined) {
 		CardContainer = 'div'
-		attributesOptions.href = link
+		// attributesOptions.href = link
 	}
 
 	return (
@@ -94,7 +97,7 @@ const Card = ({
 				{tag ? <CardTag>{tag}</CardTag> : ''}
 				{date ? <CardDate date={date} /> : ''}
 				{headline ? (
-					<CardHeader link={link}>{headline}</CardHeader>
+					<CardHeader link={link} linkTarget={linkTarget}>{headline}</CardHeader>
 				) : (
 					''
 				)}
@@ -157,6 +160,7 @@ export interface CardHeaderProps {
 	 * Image source
 	 */
 	link?: string
+	linkTarget?: CardProps['linkTarget']
 
 	/**
 	 * An additional class, optional
@@ -165,12 +169,17 @@ export interface CardHeaderProps {
 
 	children?: ReactNode
 }
-export const CardHeader = ({ className = '', link, children }: CardHeaderProps) => {
+export const CardHeader = ({
+	className = '',
+	link,
+	linkTarget,
+	children
+}: CardHeaderProps) => {
 	const HeadingTag = 'div'
 	if (link !== undefined) {
 		return (
 			<HeadingTag className={`nsw-card__title ${className}`}>
-				<a href={link} className='nsw-card__link'>
+				<a href={link} target={linkTarget} className='nsw-card__link'>
 					{children}
 				</a>
 			</HeadingTag>
@@ -251,7 +260,7 @@ export interface CardTagProps {
 }
 export const CardTag = ({
 	children,
-	className='',
+	className = '',
 	...attributesOptions
 }: CardTagProps) => (
 	<p className={`nsw-card__tag ${className}`} {...attributesOptions}>
@@ -272,7 +281,11 @@ export interface CardDateProps {
 	children?: ReactNode
 	className?: string
 }
-export const CardDate = ({ className='', date, ...attributesOptions }: CardDateProps) => (
+export const CardDate = ({
+	className = '',
+	date,
+	...attributesOptions
+}: CardDateProps) => (
 	<p className={`nsw-card__date ${className}`} {...attributesOptions}>
 		<time dateTime={date}>{date}</time>
 	</p>
@@ -290,7 +303,10 @@ export interface CardDividerProps {
 	children?: ReactNode
 	className?: string
 }
-export const CardDivider = ({ className='', ...attributesOptions }: CardDividerProps) => (
+export const CardDivider = ({
+	className = '',
+	...attributesOptions
+}: CardDividerProps) => (
 	<hr className={`nsw-card__divider ${className}`} {...attributesOptions} />
 )
 

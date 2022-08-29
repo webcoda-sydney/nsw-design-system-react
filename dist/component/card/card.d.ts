@@ -8,6 +8,7 @@ export interface CardProps {
      * The link that clicking the card goes to
      */
     link?: string;
+    linkTarget?: HTMLAnchorElement['target'];
     /**
      * The tag (optional)
      */
@@ -48,7 +49,7 @@ export interface CardProps {
     children?: ReactNode;
 }
 declare const Card: {
-    ({ link, style, headline, highlight, tag, date, image, imageAlt, className, children, ...attributesOptions }: CardProps): JSX.Element;
+    ({ link, linkTarget, style, headline, highlight, tag, date, image, imageAlt, className, children, ...attributesOptions }: CardProps): JSX.Element;
     propTypes: {
         link: PropTypes.Requireable<string>;
         style: PropTypes.Requireable<string>;
@@ -87,6 +88,7 @@ export interface CardHeaderProps {
      * Image source
      */
     link?: string;
+    linkTarget?: CardProps['linkTarget'];
     /**
      * An additional class, optional
      */
@@ -94,7 +96,7 @@ export interface CardHeaderProps {
     children?: ReactNode;
 }
 export declare const CardHeader: {
-    ({ className, link, children }: CardHeaderProps): JSX.Element;
+    ({ className, link, linkTarget, children }: CardHeaderProps): JSX.Element;
     propTypes: {
         className: PropTypes.Requireable<string>;
         link: PropTypes.Requireable<string>;

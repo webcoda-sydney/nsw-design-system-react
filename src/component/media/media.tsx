@@ -50,7 +50,7 @@ export interface MediaProps {
 	/**
 	 * Anything inside
 	 */
-	children: ReactNode
+	children?: ReactNode
 }
 export const Media = ({
 	image,

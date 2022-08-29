@@ -36,7 +36,7 @@ export interface MediaProps {
     /**
      * Anything inside
      */
-    children: ReactNode;
+    children?: ReactNode;
 }
 export declare const Media: {
     ({ image, video, title, caption, left, right, center, children, style }: MediaProps): JSX.Element;
