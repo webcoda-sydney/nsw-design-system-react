@@ -35,7 +35,7 @@ export interface MainNavProps {
 
 const BREAKPOINTS = {
 	mobile: 0,
-	tablet: 992
+	tablet: 992,
 }
 
 export const MainNav = (props: MainNavProps) => {
@@ -69,7 +69,7 @@ export const MainNav = (props: MainNavProps) => {
 	}, [])
 
 	useEffect(() => {
-		if (isCloseWhenOutsideClick && breakpoint === 'mobile') {
+		if (isCloseWhenOutsideClick && breakpoint !== 'mobile') {
 			const outsideClickToCloseActiveSubNav = (e: MouseEvent) => {
 				if (!(e.target as HTMLElement).closest('.nsw-main-nav__list')) {
 					closeActiveSubNav()

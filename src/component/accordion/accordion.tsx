@@ -31,7 +31,7 @@ export const Accordion = (props: AccordionProps) => {
                         className='material-icons nsw-material-icons nsw-accordion__icon'
                         aria-hidden='true'
                     >
-                        keyboard_arrow_right
+                        keyboard_arrow_down
                     </i>
                 </button>
             </div>

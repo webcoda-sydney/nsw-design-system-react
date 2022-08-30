@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import type { ReactNode } from 'react'
+import type { MouseEvent, ReactNode } from 'react'
 
 /**
  * Hero banner
@@ -28,6 +28,11 @@ const buttonStyles = {
 	white: 'nsw-button nsw-button--dark'
 }
 
+export interface HeroBannerImageProps {
+	src: string
+	alt: string
+}
+
 export interface HeroBannerProps {
 	/**
 	 * The title of the banner
@@ -36,21 +41,19 @@ export interface HeroBannerProps {
 	/**
 	 * The intro of the banner
 	 */
-	intro?: string
+	intro?: ReactNode
 	/**
 	 * The call to action of the banner
 	 */
 	cta?: {
 		url: string
 		text: string
+		onClick?: (e: MouseEvent<HTMLAnchorElement>) => void
 	}
 	/**
 	 * The object of the image
 	 */
-	image?: {
-		src: string
-		alt: string
-	}
+	image?: ReactNode | HeroBannerImageProps
 	/**
 	 * Dark Variant
 	 */
@@ -73,6 +76,25 @@ export interface HeroBannerProps {
 	className?: string
 	children?: ReactNode
 }
+
+const renderImage = (image?: HeroBannerProps['image']) => {
+	if (image) {
+		if (
+			typeof image !== 'number' && typeof image !== 'string' && typeof image !== 'boolean' && 'src' in image
+		) {
+			return (
+				<img
+					className='nsw-hero-banner__image'
+					src={image.src}
+					alt={image.alt}
+				/>
+			)
+		}
+		return image
+	}
+	return <div className='nsw-hero-banner__bg' />
+}
+
 export const HeroBanner = ({
 	title = 'Hero Banner',
 	intro,
@@ -84,64 +106,40 @@ export const HeroBanner = ({
 	children,
 	className = '',
 	...attributeOptions
-}: HeroBannerProps) => (
-	<div
-		className={`nsw-hero-banner ${style ? options[style] : ''} ${
-			wide ? 'nsw-hero-banner--wide' : ''
-		} ${featured ? ' nsw-hero-banner--featured' : ''}  ${className}`}
-		{...attributeOptions}
-	>
-		<div className='nsw-hero-banner__container'>
-			<div className='nsw-hero-banner__wrapper'>
-				<div className='nsw-hero-banner__content nsw-wysiwyg-content'>
-					<h1>{title}</h1>
-					<p className='nsw-intro'>{intro}</p>
-					{cta ? (
-						<div className='nsw-hero-banner__button'>
-							<a
-								href={cta.url}
-								className={`nsw-button ${buttonStyles[style]}`}
-							>
-								{cta.text}
-							</a>
-						</div>
-					) : (
-						''
-					)}
-				</div>
-				{children}
-				<div className='nsw-hero-banner__box' role='presentation'>
-					{image ? (
-						<img
-							className='nsw-hero-banner__image'
-							src={image.src}
-							alt={image.alt}
-						/>
-					) : (
-						<div className='nsw-hero-banner__bg' />
-					)}
+}: HeroBannerProps) => {
+	return (
+		<div
+			className={`nsw-hero-banner ${style ? options[style] : ''} ${
+				wide ? 'nsw-hero-banner--wide' : ''
+			} ${featured ? ' nsw-hero-banner--featured' : ''}  ${className}`}
+			{...attributeOptions}
+		>
+			<div className='nsw-hero-banner__container'>
+				<div className='nsw-hero-banner__wrapper'>
+					<div className='nsw-hero-banner__content nsw-wysiwyg-content'>
+						<h1>{title}</h1>
+						<div className='nsw-intro'>{intro}</div>
+						{cta ? (
+							<div className='nsw-hero-banner__button'>
+								<a
+									href={cta.url}
+									className={`nsw-button ${buttonStyles[style]}`}
+									onClick={cta.onClick}
+								>
+									{cta.text}
+								</a>
+							</div>
+						) : (
+							''
+						)}
+					</div>
+					{children}
+					<div className='nsw-hero-banner__box' role='presentation'>
+						{renderImage(image)}
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-)
-
-HeroBanner.propTypes = {
-	title: PropTypes.string.isRequired,
-	intro: PropTypes.string.isRequired,
-	style: PropTypes.oneOf(['dark', 'light', 'white']),
-	wide: PropTypes.bool,
-	featured: PropTypes.bool,
-	children: PropTypes.node,
-	className: PropTypes.string,
-	cta: PropTypes.shape({
-		url: PropTypes.string,
-		text: PropTypes.string
-	}),
-	image: PropTypes.shape({
-		src: PropTypes.string,
-		alt: PropTypes.string
-	})
+	)
 }
-
 export default HeroBanner
