@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, Fragment } from 'react'
+import React, { useRef, useEffect, Fragment, ElementType } from 'react'
 import PropTypes from 'prop-types'
 
 /**
@@ -33,6 +33,10 @@ export interface HeaderProps {
 	 * Event handler for header search
 	 */
 	onSubmit?: (e: React.FormEvent) => void
+	/**
+	 * Link component of the logo
+	 */
+	linkComponent?: string | ElementType
 }
 export const Header = (props: HeaderProps) => {
 	const {
@@ -40,6 +44,7 @@ export const Header = (props: HeaderProps) => {
 		siteDescriptor,
 		logo,
 		headerUrl,
+		linkComponent: LinkComponent = 'a',
 		mobile = true,
 		search = true,
 		onSubmit,
@@ -66,7 +71,7 @@ export const Header = (props: HeaderProps) => {
 					<div className='nsw-header__inner'>
 						<div className='nsw-header__main'>
 							<div className='nsw-header__waratah'>
-								<a
+								<LinkComponent
 									href={headerUrl}
 									className='nsw-header__logo-link'
 								>
@@ -99,7 +104,7 @@ export const Header = (props: HeaderProps) => {
 									<span className='sr-only'>
 										NSW Government
 									</span>
-								</a>
+								</LinkComponent>
 							</div>
 							{logo ? (
 								<div className='nsw-header__name'>
@@ -223,16 +228,6 @@ export const Header = (props: HeaderProps) => {
 			</header>
 		</Fragment>
 	)
-}
-
-Header.propTypes = {
-	siteTitle: PropTypes.string,
-	siteDescriptor: PropTypes.string,
-	logo: PropTypes.string,
-	headerUrl: PropTypes.string.isRequired,
-	mobile: PropTypes.bool,
-	search: PropTypes.bool,
-	onSubmit: PropTypes.func
 }
 
 export default Header

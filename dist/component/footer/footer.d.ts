@@ -1,5 +1,4 @@
-import PropTypes from 'prop-types';
-import type { ReactNode } from 'react';
+import type { ElementType, ReactNode } from 'react';
 /**
  * A section for the footer that sits at the end
  */
@@ -7,6 +6,7 @@ export interface FooterLinksItem {
     url: string;
     text: string;
     target?: HTMLAnchorElement['target'];
+    linkComponent?: string | ElementType;
 }
 export interface FooterLinksProps {
     /**
@@ -22,16 +22,7 @@ export interface FooterLinksProps {
      */
     className?: string;
 }
-export declare const FooterLinks: {
-    ({ footerLinks, className, ...attributeOptions }: FooterLinksProps): JSX.Element;
-    propTypes: {
-        footerLinks: PropTypes.Requireable<(PropTypes.InferProps<{
-            url: PropTypes.Validator<string>;
-            text: PropTypes.Validator<string>;
-        }> | null | undefined)[]>;
-        className: PropTypes.Requireable<string>;
-    };
-};
+export declare const FooterLinks: ({ footerLinks, className, ...attributeOptions }: FooterLinksProps) => JSX.Element;
 /**
  * A section for the footer that sits at the end
  */
@@ -53,20 +44,7 @@ export interface FooterSectionGroupProps {
      */
     className?: string;
 }
-export declare const FooterSectionGroup: {
-    ({ heading, sectionLinks, className, ...attributeOptions }: FooterSectionGroupProps): JSX.Element;
-    propTypes: {
-        heading: PropTypes.Requireable<PropTypes.InferProps<{
-            url: PropTypes.Validator<string>;
-            text: PropTypes.Validator<string>;
-        }>>;
-        sectionLinks: PropTypes.Requireable<(PropTypes.InferProps<{
-            url: PropTypes.Validator<string>;
-            text: PropTypes.Validator<string>;
-        }> | null | undefined)[]>;
-        className: PropTypes.Requireable<string>;
-    };
-};
+export declare const FooterSectionGroup: ({ heading, sectionLinks, className, ...attributeOptions }: FooterSectionGroupProps) => JSX.Element;
 /**
  * A section for the footer that contains navigational elements
  */
@@ -84,14 +62,7 @@ export interface FooterUpperProps {
      */
     ariaLabel?: string;
 }
-export declare const FooterUpper: {
-    ({ children, className, ariaLabel, ...attributeOptions }: FooterUpperProps): JSX.Element;
-    propTypes: {
-        children: PropTypes.Validator<string | number | boolean | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
-        className: PropTypes.Requireable<string>;
-        ariaLabel: PropTypes.Requireable<string>;
-    };
-};
+export declare const FooterUpper: ({ children, className, ariaLabel, ...attributeOptions }: FooterUpperProps) => JSX.Element;
 /**
  * A section for the footer that sits at the end
  */
@@ -105,13 +76,7 @@ export interface FooterLowerProps {
      */
     className?: string;
 }
-export declare const FooterLower: {
-    ({ children, className, ...attributeOptions }: FooterLowerProps): JSX.Element;
-    propTypes: {
-        children: PropTypes.Validator<string | number | boolean | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
-        className: PropTypes.Requireable<string>;
-    };
-};
+export declare const FooterLower: ({ children, className, ...attributeOptions }: FooterLowerProps) => JSX.Element;
 /**
  * DEFAULT
  * The footer component
@@ -126,11 +91,5 @@ export interface FooterProps {
      */
     className?: string;
 }
-declare const Footer: {
-    ({ children, className, ...attributeOptions }: FooterProps): JSX.Element;
-    propTypes: {
-        children: PropTypes.Validator<string | number | boolean | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
-        className: PropTypes.Requireable<string>;
-    };
-};
+declare const Footer: ({ children, className, ...attributeOptions }: FooterProps) => JSX.Element;
 export default Footer;

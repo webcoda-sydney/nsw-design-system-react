@@ -69,7 +69,7 @@ export interface BreadcrumbLinkListItemProps {
 	/**
 	 * The component used for the link
 	 */
-	linkComponent?: BreadcrumbLinkListProps['linkComponent']
+	linkComponent?: string | ElementType
 
 	children?: ReactNode
 
@@ -157,11 +157,6 @@ export interface BreadcrumbLinkListProps {
     inline?: boolean
 
     /**
-     * The component used for the link
-     */
-    linkComponent?: string
-
-    /**
      * All items inside the link list to be passed to BreadcrumbLinkListItem
      */
     items: BreadcrumbLinkListItemProps[]
@@ -175,7 +170,6 @@ export interface BreadcrumbLinkListProps {
 export const BreadcrumbLinkList = ({
     inline,
     items,
-    linkComponent = 'a',
     className = '',
     ...attributeOptions
 }: BreadcrumbLinkListProps) => (

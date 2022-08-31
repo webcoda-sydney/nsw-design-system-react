@@ -1,5 +1,4 @@
-import PropTypes from 'prop-types'
-import type { ReactNode } from 'react'
+import type { ElementType, ReactNode } from 'react'
 /**
  * A section for the footer that sits at the end
  */
@@ -8,6 +7,7 @@ export interface FooterLinksItem {
 	url: string
 	text: string
 	target?: HTMLAnchorElement['target']
+	linkComponent?: string | ElementType
 }
 export interface FooterLinksProps {
 	/**
@@ -32,23 +32,26 @@ export const FooterLinks = ({
 	...attributeOptions
 }: FooterLinksProps) => (
 	<ul className={className} {...attributeOptions}>
-		{footerLinks.map(({ url, text, target }, index) => (
-			<li key={url+text+index}>
-				<a href={url} target={target}>{text}</a>
-			</li>
-		))}
+		{footerLinks.map(
+			(
+				{
+					url,
+					text,
+					target,
+					linkComponent: LinkComponent = 'a',
+					...attrs
+				},
+				index
+			) => (
+				<li key={url + text + index}>
+					<LinkComponent {...attrs} href={url} target={target}>
+						{text}
+					</LinkComponent>
+				</li>
+			)
+		)}
 	</ul>
 )
-
-FooterLinks.propTypes = {
-	footerLinks: PropTypes.arrayOf(
-		PropTypes.shape({
-			url: PropTypes.string.isRequired,
-			text: PropTypes.string.isRequired
-		})
-	),
-	className: PropTypes.string
-}
 
 /**
  * A section for the footer that sits at the end
@@ -84,28 +87,27 @@ export const FooterSectionGroup = ({
 			<a href={heading.url}>{heading.text}</a>
 		</h3>
 		<ul className='nsw-footer__list'>
-			{sectionLinks.map(({ url, text, target }, index) => (
-				<li key={url + text + index}>
-					<a href={url} target={target}>{text}</a>
-				</li>
-			))}
+			{sectionLinks.map(
+				(
+					{
+						url,
+						text,
+						target,
+						linkComponent: LinkComponent = 'a',
+						...attrs
+					},
+					index
+				) => (
+					<li key={url + text + index}>
+						<LinkComponent {...attrs} href={url} target={target}>
+							{text}
+						</LinkComponent>
+					</li>
+				)
+			)}
 		</ul>
 	</div>
 )
-
-FooterSectionGroup.propTypes = {
-	heading: PropTypes.shape({
-		url: PropTypes.string.isRequired,
-		text: PropTypes.string.isRequired
-	}),
-	sectionLinks: PropTypes.arrayOf(
-		PropTypes.shape({
-			url: PropTypes.string.isRequired,
-			text: PropTypes.string.isRequired
-		})
-	),
-	className: PropTypes.string
-}
 
 /**
  * A section for the footer that contains navigational elements
@@ -142,12 +144,6 @@ export const FooterUpper = ({
 	</nav>
 )
 
-FooterUpper.propTypes = {
-	children: PropTypes.node.isRequired,
-	className: PropTypes.string,
-	ariaLabel: PropTypes.string
-}
-
 /**
  * A section for the footer that sits at the end
  */
@@ -172,11 +168,6 @@ export const FooterLower = ({
 	</div>
 )
 
-FooterLower.propTypes = {
-	children: PropTypes.node.isRequired,
-	className: PropTypes.string
-}
-
 /**
  * DEFAULT
  * The footer component
@@ -192,7 +183,11 @@ export interface FooterProps {
 	 */
 	className?: string
 }
-const Footer = ({ children, className = '', ...attributeOptions }: FooterProps) => (
+const Footer = ({
+	children,
+	className = '',
+	...attributeOptions
+}: FooterProps) => (
 	<footer
 		className={`nsw-footer ${className}`}
 		{...attributeOptions}
@@ -201,10 +196,5 @@ const Footer = ({ children, className = '', ...attributeOptions }: FooterProps) 
 		{children}
 	</footer>
 )
-
-Footer.propTypes = {
-	children: PropTypes.node.isRequired,
-	className: PropTypes.string
-}
 
 export default Footer

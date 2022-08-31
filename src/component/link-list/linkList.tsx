@@ -12,14 +12,19 @@ export interface LinkListItemProps {
 	text: ReactNode
 
 	/**
-	 * The link URL, optional
+	 * The link URL
 	 */
 	link: string
 
 	/**
+	 * The target URL
+	 */
+	target?: HTMLAnchorElement['target']
+
+	/**
 	 * The component used for the link
 	 */
-	linkComponent?: string
+	linkComponent?: string | Function
 
 	/**
 	 * The onClick event handler
@@ -30,6 +35,7 @@ export interface LinkListItemProps {
 
 	href?: string
 	to?: string
+	rel?: HTMLAnchorElement['rel']
 }
 
 export const LinkListItem = ({
@@ -56,6 +62,7 @@ export const LinkListItem = ({
 	// If we are using a normal link
 	if (LinkComponent === 'a') {
 		attributeOptions.href = link
+		attributeOptions.rel = attributeOptions?.target === '_blank' ? 'nofollow noopener' : undefined
 	} else if (typeof LinkComponent === 'function') {
 		// If we are using a link component
 		attributeOptions.to = link
@@ -113,7 +120,6 @@ export interface LinkListProps {
 }
 export const LinkList = ({
 	items,
-	linkComponent = 'a',
 	className = '',
 	...attributeOptions
 }: LinkListProps) => (
@@ -126,7 +132,6 @@ export const LinkList = ({
 				<LinkListItem
 					key={item.href || '' + index}
 					{...item}
-					linkComponent={linkComponent}
 				/>
 			))}
 		</ul>

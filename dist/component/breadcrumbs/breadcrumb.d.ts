@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import type { ReactNode } from 'react';
+import type { ElementType, ReactNode } from 'react';
 export interface BreadcrumbProps {
     /**
      * The aria label of the component
@@ -42,7 +42,7 @@ export interface BreadcrumbLinkListItemProps {
     /**
      * The component used for the link
      */
-    linkComponent?: BreadcrumbLinkListProps['linkComponent'];
+    linkComponent?: string | ElementType;
     children?: ReactNode;
     /**
      * The onClick event handler
@@ -81,10 +81,6 @@ export interface BreadcrumbLinkListProps {
      */
     inline?: boolean;
     /**
-     * The component used for the link
-     */
-    linkComponent?: string;
-    /**
      * All items inside the link list to be passed to BreadcrumbLinkListItem
      */
     items: BreadcrumbLinkListItemProps[];
@@ -93,5 +89,5 @@ export interface BreadcrumbLinkListProps {
      */
     className?: string;
 }
-export declare const BreadcrumbLinkList: ({ inline, items, linkComponent, className, ...attributeOptions }: BreadcrumbLinkListProps) => JSX.Element;
+export declare const BreadcrumbLinkList: ({ inline, items, className, ...attributeOptions }: BreadcrumbLinkListProps) => JSX.Element;
 export default Breadcrumbs;

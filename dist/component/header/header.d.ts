@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { ElementType } from 'react';
 /**
  * Displays across the top of all NSW Government sites
  */
@@ -32,17 +31,10 @@ export interface HeaderProps {
      * Event handler for header search
      */
     onSubmit?: (e: React.FormEvent) => void;
+    /**
+     * Link component of the logo
+     */
+    linkComponent?: string | ElementType;
 }
-export declare const Header: {
-    (props: HeaderProps): JSX.Element;
-    propTypes: {
-        siteTitle: PropTypes.Requireable<string>;
-        siteDescriptor: PropTypes.Requireable<string>;
-        logo: PropTypes.Requireable<string>;
-        headerUrl: PropTypes.Validator<string>;
-        mobile: PropTypes.Requireable<boolean>;
-        search: PropTypes.Requireable<boolean>;
-        onSubmit: PropTypes.Requireable<(...args: any[]) => any>;
-    };
-};
+export declare const Header: (props: HeaderProps) => JSX.Element;
 export default Header;

@@ -60,6 +60,8 @@ export interface CardProps {
 	href?: string
 
 	children?: ReactNode
+
+	linkComponent?: string | ElementType
 }
 
 const Card = ({
@@ -74,6 +76,7 @@ const Card = ({
 	imageAlt,
 	className = '',
 	children,
+	linkComponent: LinkComponent = 'a',
 	...attributesOptions
 }: CardProps) => {
 	let CardContainer = 'div' as ElementType
@@ -87,7 +90,7 @@ const Card = ({
 		<CardContainer
 			className={
 				`nsw-card nsw-card--${style} ${className}` +
-				`${headline ? 'nsw-card--headline' : ''} ` +
+				`${headline && !children ? 'nsw-card--headline' : ''} ` +
 				`${highlight ? 'nsw-card--highlight' : ''} `
 			}
 			{...attributesOptions}
@@ -97,7 +100,13 @@ const Card = ({
 				{tag ? <CardTag>{tag}</CardTag> : ''}
 				{date ? <CardDate date={date} /> : ''}
 				{headline ? (
-					<CardHeader link={link} linkTarget={linkTarget}>{headline}</CardHeader>
+					<CardHeader
+						link={link}
+						linkTarget={linkTarget}
+						linkComponent={LinkComponent}
+					>
+						{headline}
+					</CardHeader>
 				) : (
 					''
 				)}
@@ -105,19 +114,6 @@ const Card = ({
 			</CardContent>
 		</CardContainer>
 	)
-}
-
-Card.propTypes = {
-	link: PropTypes.string,
-	style: PropTypes.oneOf(['dark', 'light', 'white']),
-	tag: PropTypes.string,
-	date: PropTypes.string,
-	image: PropTypes.string,
-	imageAlt: PropTypes.string,
-	headline: PropTypes.node.isRequired,
-	highlight: PropTypes.bool,
-	className: PropTypes.string,
-	children: PropTypes.node
 }
 
 /**
@@ -147,11 +143,6 @@ export const CardContent = ({
 	</div>
 )
 
-CardContent.propTypes = {
-	className: PropTypes.string,
-	children: PropTypes.node
-}
-
 /**
  * An inner container for the card, with padding of 1 rem
  */
@@ -161,6 +152,7 @@ export interface CardHeaderProps {
 	 */
 	link?: string
 	linkTarget?: CardProps['linkTarget']
+	linkComponent?: CardProps['linkComponent']
 
 	/**
 	 * An additional class, optional
@@ -172,6 +164,7 @@ export interface CardHeaderProps {
 export const CardHeader = ({
 	className = '',
 	link,
+	linkComponent: LinkComponent = 'a',
 	linkTarget,
 	children
 }: CardHeaderProps) => {
@@ -179,19 +172,17 @@ export const CardHeader = ({
 	if (link !== undefined) {
 		return (
 			<HeadingTag className={`nsw-card__title ${className}`}>
-				<a href={link} target={linkTarget} className='nsw-card__link'>
+				<LinkComponent
+					href={link}
+					target={linkTarget}
+					className='nsw-card__link'
+				>
 					{children}
-				</a>
+				</LinkComponent>
 			</HeadingTag>
 		)
 	}
 	return <HeadingTag className='nsw-card__title'>{children}</HeadingTag>
-}
-
-CardHeader.propTypes = {
-	className: PropTypes.string,
-	link: PropTypes.string,
-	children: PropTypes.node
 }
 
 /**
@@ -220,12 +211,6 @@ export const CardImage = ({
 	</div>
 )
 
-CardImage.propTypes = {
-	src: PropTypes.string.isRequired,
-	className: PropTypes.string,
-	alt: PropTypes.string
-}
-
 /**
  * An paragraph inside the card
  */
@@ -245,12 +230,6 @@ export const CardCopy = ({
 	</p>
 )
 
-CardCopy.propTypes = {
-	className: PropTypes.string,
-	src: PropTypes.string,
-	children: PropTypes.node
-}
-
 /**
  * An tag inside the card
  */
@@ -267,11 +246,6 @@ export const CardTag = ({
 		{children}
 	</p>
 )
-
-CardTag.propTypes = {
-	className: PropTypes.string,
-	children: PropTypes.node
-}
 
 /**
  * An date inside the card
@@ -291,10 +265,6 @@ export const CardDate = ({
 	</p>
 )
 
-CardDate.propTypes = {
-	className: PropTypes.string,
-	date: PropTypes.string.isRequired
-}
 /**
  * A horizontal rule used to divide content inside the card
  */
@@ -309,10 +279,6 @@ export const CardDivider = ({
 }: CardDividerProps) => (
 	<hr className={`nsw-card__divider ${className}`} {...attributesOptions} />
 )
-
-CardDivider.propTypes = {
-	className: PropTypes.string
-}
 
 /**
  * Use when making the entire click area of card clickable.
@@ -350,12 +316,6 @@ export const CardLink = ({
 	</a>
 )
 
-CardLink.propTypes = {
-	link: PropTypes.string.isRequired,
-	text: PropTypes.string.isRequired,
-	className: PropTypes.string
-}
-
 /**
  * The footer section of the card
  */
@@ -376,12 +336,6 @@ export const CardFooter = ({
 	</div>
 )
 
-CardFooter.propTypes = {
-	className: PropTypes.string,
-	dark: PropTypes.bool,
-	alt: PropTypes.bool,
-	children: PropTypes.node
-}
 /**
  * The footer section of the card
  */
@@ -404,11 +358,6 @@ export const CardTitle = ({
 			{children}
 		</HeadingTag>
 	)
-}
-
-CardTitle.propTypes = {
-	className: PropTypes.string,
-	children: PropTypes.node
 }
 
 export default Card

@@ -10,13 +10,17 @@ export interface LinkListItemProps {
      */
     text: ReactNode;
     /**
-     * The link URL, optional
+     * The link URL
      */
     link: string;
     /**
+     * The target URL
+     */
+    target?: HTMLAnchorElement['target'];
+    /**
      * The component used for the link
      */
-    linkComponent?: string;
+    linkComponent?: string | Function;
     /**
      * The onClick event handler
      */
@@ -24,6 +28,7 @@ export interface LinkListItemProps {
     children?: ReactNode;
     href?: string;
     to?: string;
+    rel?: HTMLAnchorElement['rel'];
 }
 export declare const LinkListItem: {
     ({ text, link, linkComponent, children, onClick, ...attributeOptions }: LinkListItemProps): JSX.Element;
@@ -54,7 +59,7 @@ export interface LinkListProps {
     linkComponent?: string;
 }
 export declare const LinkList: {
-    ({ items, linkComponent, className, ...attributeOptions }: LinkListProps): JSX.Element;
+    ({ items, className, ...attributeOptions }: LinkListProps): JSX.Element;
     propTypes: {
         items: PropTypes.Validator<(PropTypes.InferProps<{
             link: PropTypes.Requireable<string>;

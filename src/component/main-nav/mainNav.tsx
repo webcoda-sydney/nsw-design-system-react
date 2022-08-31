@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { ReactNode, useEffect, useRef } from 'react'
+import { ElementType, ReactNode, useEffect, useRef } from 'react'
 import useIdExtended from '@/hooks/useIdExtended'
 import useBreakpoint from 'use-breakpoint'
 
@@ -10,6 +10,7 @@ export interface NavItem {
 	description?: string
 	target?: string
 	subNav?: NavItem[]
+	linkComponent?: string | ElementType
 }
 export interface MainNavProps {
 	/**
@@ -25,8 +26,6 @@ export interface MainNavProps {
 	 */
 	className?: string
 
-	renderLink?: (e: NavItem) => ReactNode
-
 	/**
 	 * Enable outside click to close the sub navigation
 	 */
@@ -35,7 +34,7 @@ export interface MainNavProps {
 
 const BREAKPOINTS = {
 	mobile: 0,
-	tablet: 992,
+	tablet: 992
 }
 
 export const MainNav = (props: MainNavProps) => {
@@ -43,7 +42,6 @@ export const MainNav = (props: MainNavProps) => {
 		navItems,
 		megaMenu,
 		className = '',
-		renderLink,
 		isCloseWhenOutsideClick = true,
 		...attributeOptions
 	} = props
@@ -111,19 +109,21 @@ export const MainNav = (props: MainNavProps) => {
 				</button>
 			</div>
 			<ul ref={refMainNavList} className='nsw-main-nav__list'>
-				{navItems.map((navItem, index) => (
-					<li
-						key={
-							navItem.id
-								? `navItem-${navItem.id}`
-								: navItem.url + navItem.text + index
-						}
-					>
-						<>
-							{renderLink ? (
-								renderLink(navItem)
-							) : (
-								<a href={navItem.url} target={navItem.target}>
+				{navItems.map((navItem, index) => {
+					const LinkComponent = navItem.linkComponent || 'a'
+					return (
+						<li
+							key={
+								navItem.id
+									? `navItem-${navItem.id}`
+									: navItem.url + navItem.text + index
+							}
+						>
+							<>
+								<LinkComponent
+									href={navItem.url}
+									target={navItem.target}
+								>
 									<span>{navItem.text}</span>
 									{!!navItem.subNav?.length ? (
 										<span
@@ -135,24 +135,24 @@ export const MainNav = (props: MainNavProps) => {
 									) : (
 										''
 									)}
-								</a>
-							)}
-							{!!navItem.subNav?.length ? (
-								<SubNav
-									subNav={navItem.subNav}
-									url={navItem.url}
-									text={navItem.text}
-									target={navItem.target}
-									description={navItem.description}
-									id={navItem.id}
-									renderLink={renderLink}
-								/>
-							) : (
-								''
-							)}
-						</>
-					</li>
-				))}
+								</LinkComponent>
+								{!!navItem.subNav?.length ? (
+									<SubNav
+										subNav={navItem.subNav}
+										url={navItem.url}
+										text={navItem.text}
+										target={navItem.target}
+										description={navItem.description}
+										id={navItem.id}
+										linkComponent={LinkComponent}
+									/>
+								) : (
+									''
+								)}
+							</>
+						</li>
+					)
+				})}
 			</ul>
 		</nav>
 	)
@@ -178,7 +178,8 @@ export const SubNavHeader = ({
 	text,
 	description,
 	id,
-	target
+	target,
+	linkComponent: LinkComponent = 'a'
 }: Omit<NavItem, 'subNav'>) => (
 	<>
 		<div className='nsw-main-nav__header'>
@@ -214,7 +215,7 @@ export const SubNavHeader = ({
 			</button>
 		</div>
 		<div className='nsw-main-nav__title'>
-			<a href={url} target={target}>
+			<LinkComponent href={url} target={target}>
 				<span>{text}</span>
 				<span
 					className='material-icons nsw-material-icons'
@@ -222,23 +223,13 @@ export const SubNavHeader = ({
 				>
 					east
 				</span>
-			</a>
+			</LinkComponent>
 		</div>
 		<div className='nsw-main-nav__description'>{description}</div>
 	</>
 )
 
-SubNavHeader.propTypes = {
-	url: PropTypes.string,
-	text: PropTypes.string,
-	description: PropTypes.string,
-	id: PropTypes.string,
-	target: PropTypes.string
-}
-
-export type SubNavProps = NavItem & {
-	renderLink?: MainNavProps['renderLink']
-}
+export type SubNavProps = NavItem
 export const SubNav = ({
 	id = '',
 	subNav,
@@ -246,10 +237,10 @@ export const SubNav = ({
 	text,
 	description,
 	target,
-	renderLink
+	linkComponent = 'a',
 }: SubNavProps) => {
 	const _id = id || useIdExtended()
-	if(!subNav) return null
+	if (!subNav) return null
 	return (
 		<div
 			className='nsw-main-nav__sub-nav'
@@ -263,33 +254,31 @@ export const SubNav = ({
 				description={description}
 				id={_id}
 				target={target}
+				linkComponent={linkComponent}
 			/>
 			<ul className='nsw-main-nav__sub-list'>
 				{subNav.map((subNavItem, index) => {
 					const subNavId = _id + index
+					const LinkComponent = subNavItem.linkComponent || 'a'
 					return (
 						<li key={subNavId}>
 							<>
-								{renderLink ? (
-									renderLink(subNavItem)
-								) : (
-									<a
-										href={subNavItem.url}
-										target={subNavItem.target}
-									>
-										<span>{subNavItem.text}</span>
-										{!!subNavItem.subNav?.length ? (
-											<span
-												className='material-icons nsw-material-icons nsw-main-nav__link-icon'
-												aria-hidden='true'
-											>
-												keyboard_arrow_right
-											</span>
-										) : (
-											''
-										)}
-									</a>
-								)}
+								<LinkComponent
+									href={subNavItem.url}
+									target={subNavItem.target}
+								>
+									<span>{subNavItem.text}</span>
+									{!!subNavItem.subNav?.length ? (
+										<span
+											className='material-icons nsw-material-icons nsw-main-nav__link-icon'
+											aria-hidden='true'
+										>
+											keyboard_arrow_right
+										</span>
+									) : (
+										''
+									)}
+								</LinkComponent>
 
 								{!!subNavItem.subNav?.length ? (
 									<div
@@ -303,37 +292,29 @@ export const SubNav = ({
 											text={text}
 											description={description}
 											id={subNavId}
+											linkComponent={LinkComponent}
 										/>
 										<ul className='nsw-main-nav__sub-list'>
 											{subNavItem.subNav.map(
-												(subSubNavItem, index) => (
-													<li
-														key={
-															subSubNavItem.url +
-															subSubNavItem.text +
-															index
-														}
-													>
-														{renderLink ? (
-															renderLink(
-																subSubNavItem
-															)
-														) : (
-															<a
-																href={
-																	subSubNavItem.url
-																}
-																target={
-																	subSubNavItem.target
-																}
+												(subSubNavItem, index) => {
+													const SubLinkComponent = subSubNavItem.linkComponent || 'a'
+													return (
+														<li
+															key={subSubNavItem.url +
+																subSubNavItem.text +
+																index}
+														>
+															<SubLinkComponent
+																href={subSubNavItem.url}
+																target={subSubNavItem.target}
 																className='nsw-subnavigation__link'
 															>
 																<span>
-																	{
-																		subSubNavItem.text
-																	}
+																	{subSubNavItem.text}
 																</span>
-																{!!subSubNavItem.subNav?.length ? (
+																{!!subSubNavItem
+																	.subNav
+																	?.length ? (
 																	<span
 																		className='material-icons nsw-material-icons nsw-main-nav__link-icon'
 																		aria-hidden='true'
@@ -343,10 +324,10 @@ export const SubNav = ({
 																) : (
 																	''
 																)}
-															</a>
-														)}
-													</li>
-												)
+															</SubLinkComponent>
+														</li>
+													)
+												}
 											)}
 										</ul>
 									</div>
