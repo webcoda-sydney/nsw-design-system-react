@@ -35,7 +35,7 @@ export interface CardProps {
 	/**
 	 * The image URL/path (optional)
 	 */
-	image?: string
+	image?: ReactNode
 
 	/**
 	 * The alt text for image (mandatory if image supplied)
@@ -86,6 +86,18 @@ const Card = ({
 		// attributesOptions.href = link
 	}
 
+	const renderImage = () => {
+		if(!image) {
+			return ''
+		}
+		if(typeof image === 'string') {
+			return <CardImage src={image} alt={imageAlt || ''} />
+		}
+		if(typeof image === 'function') {
+			return <CardImage alt={imageAlt || ''}>{image}</CardImage>
+		}
+	}
+
 	return (
 		<CardContainer
 			className={
@@ -95,7 +107,7 @@ const Card = ({
 			}
 			{...attributesOptions}
 		>
-			{image ? <CardImage src={image} alt={imageAlt || ''} /> : ''}
+			{renderImage()}
 			<CardContent>
 				{tag ? <CardTag>{tag}</CardTag> : ''}
 				{date ? <CardDate date={date} /> : ''}
@@ -192,22 +204,28 @@ export interface CardImageProps {
 	/**
 	 * Image source
 	 */
-	src: string
+	src?: string
 
 	alt?: string
 	/**
 	 * An additional class, optional
 	 */
 	className?: string
+	children?: ReactNode
 }
 export const CardImage = ({
 	src,
 	className = '',
 	alt = '',
+	children,
 	...attributesOptions
 }: CardImageProps) => (
 	<div className='nsw-card__image'>
-		<img className={className} src={src} alt={alt} {...attributesOptions} />
+		{
+			children || (
+				<img className={className} src={src} alt={alt} {...attributesOptions} />
+			)
+		}
 	</div>
 )
 
@@ -225,9 +243,9 @@ export const CardCopy = ({
 	className = '',
 	...attributesOptions
 }: CardCopyProps) => (
-	<p className={`nsw-card__copy ${className}`} {...attributesOptions}>
+	<div className={`nsw-card__copy ${className}`} {...attributesOptions}>
 		{children}
-	</p>
+	</div>
 )
 
 /**

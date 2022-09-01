@@ -27,7 +27,7 @@ export interface CardProps {
     /**
      * The image URL/path (optional)
      */
-    image?: string;
+    image?: ReactNode;
     /**
      * The alt text for image (mandatory if image supplied)
      */
@@ -84,14 +84,15 @@ export interface CardImageProps {
     /**
      * Image source
      */
-    src: string;
+    src?: string;
     alt?: string;
     /**
      * An additional class, optional
      */
     className?: string;
+    children?: ReactNode;
 }
-export declare const CardImage: ({ src, className, alt, ...attributesOptions }: CardImageProps) => JSX.Element;
+export declare const CardImage: ({ src, className, alt, children, ...attributesOptions }: CardImageProps) => JSX.Element;
 /**
  * An paragraph inside the card
  */

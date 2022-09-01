@@ -93,13 +93,6 @@ export const LinkListItem = ({
 	)
 }
 
-LinkListItem.propTypes = {
-	text: PropTypes.node.isRequired,
-	link: PropTypes.string,
-	onClick: PropTypes.func,
-	linkComponent: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
-	children: PropTypes.node
-}
 /**
  * DEFAULT
  * The Link List component
@@ -137,16 +130,4 @@ export const LinkList = ({
 		</ul>
 	</div>
 )
-
-LinkList.propTypes = {
-	items: PropTypes.arrayOf(
-		PropTypes.shape({
-			link: PropTypes.string,
-			text: PropTypes.node.isRequired
-		})
-	).isRequired,
-	linkComponent: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
-	className: PropTypes.string
-}
-
 export default LinkList
