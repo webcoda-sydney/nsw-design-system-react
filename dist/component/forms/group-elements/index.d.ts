@@ -56,17 +56,12 @@ export interface FormLabelProps {
      * An additional class, optional
      */
     className?: string;
+    /**
+     * Is sreen-reader only
+     */
+    isSrOnly?: boolean;
 }
-export declare const FormLabel: {
-    ({ htmlFor, text, dark, inline, className, ...attributeOptions }: FormLabelProps): JSX.Element;
-    propTypes: {
-        text: PropTypes.Validator<string>;
-        dark: PropTypes.Requireable<boolean>;
-        inline: PropTypes.Requireable<boolean>;
-        className: PropTypes.Requireable<string>;
-        htmlFor: PropTypes.Requireable<string>;
-    };
-};
+export declare const FormLabel: ({ htmlFor, text, dark, inline, className, isSrOnly, ...attributeOptions }: FormLabelProps) => JSX.Element;
 /**
  * The form group component
  *
@@ -105,18 +100,11 @@ export interface FormGroupProps {
      */
     htmlId?: string;
     children?: ReactNode;
+    /**
+     * Hide label but readable for screen-reader
+     */
+    hideLabel?: boolean;
+    isInputGroup?: boolean;
+    isInputGroupIcon?: boolean;
 }
-export declare const FormGroup: {
-    ({ htmlId, status, children, label, helper, statusText, error, className, ...attributeOptions }: FormGroupProps): JSX.Element;
-    propTypes: {
-        status: PropTypes.Requireable<string>;
-        error: PropTypes.Requireable<boolean>;
-        className: PropTypes.Requireable<string>;
-        htmlId: PropTypes.Requireable<string>;
-        label: PropTypes.Requireable<string>;
-        children: PropTypes.Requireable<PropTypes.ReactNodeLike>;
-        helper: PropTypes.Requireable<string>;
-        statusText: PropTypes.Requireable<string>;
-        uniqueID: PropTypes.Requireable<(...args: any[]) => any>;
-    };
-};
+export declare const FormGroup: ({ htmlId, status, children, label, helper, statusText, error, className, hideLabel, isInputGroup, isInputGroupIcon, ...attributeOptions }: FormGroupProps) => JSX.Element;

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
-import type { ButtonHTMLAttributes, ElementType } from 'react'
+import type { ButtonHTMLAttributes, ComponentPropsWithoutRef, ElementType, ReactNode } from 'react'
 
-export interface ButtonProps {
+export type ButtonProps = (ComponentPropsWithoutRef<'button'> | ComponentPropsWithoutRef<'href'>)  & {
 	/**
 	 * The component used for the link
 	 */
@@ -16,7 +16,7 @@ export interface ButtonProps {
 	/**
 	 * Anything inside
 	 */
-	children: string
+	children: ReactNode
 
 	/**
 	 * The button style
@@ -62,7 +62,8 @@ export const Button = ({
         if (LinkComponent === 'a') {
             attributeOptions.href = link
             // If we are using a link component
-        } else if (typeof LinkComponent === 'function') {
+        }
+		else if (typeof LinkComponent === 'function') {
             attributeOptions.to = link
         }
 
@@ -71,7 +72,7 @@ export const Button = ({
                 className={`nsw-button ${className} nsw-button--${style}${
                     block ? ' nsw-button--block' : ''
                 }`}
-                {...attributeOptions}
+                {...attributeOptions as ComponentPropsWithoutRef<'a'>}
             >
                 {children}
             </LinkComponent>
@@ -84,7 +85,7 @@ export const Button = ({
             className={`nsw-button ${className} nsw-button--${style}${
                 block ? ' nsw-button--block' : ''
             }`}
-            {...attributeOptions}
+            {...attributeOptions as ComponentPropsWithoutRef<'button'>}
         >
             {children}
         </button>

@@ -64,7 +64,7 @@ export const Media = ({
 	style = 'default'
 }: MediaProps) => (
 	<figure
-		className={`nsw-media${
+		className={`nsw-media ${
 			left === undefined || left === 'none'
 				? ''
 				: ` nsw-media--left-${left}`

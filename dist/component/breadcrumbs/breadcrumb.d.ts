@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import type { ElementType, ReactNode } from 'react';
 export interface BreadcrumbProps {
     /**
@@ -18,18 +17,7 @@ export interface BreadcrumbProps {
      */
     className?: string;
 }
-export declare const Breadcrumbs: {
-    ({ label, items, linkComponent, className, ...attributeOptions }: BreadcrumbProps): JSX.Element;
-    propTypes: {
-        label: PropTypes.Requireable<string>;
-        items: PropTypes.Validator<(PropTypes.InferProps<{
-            link: PropTypes.Requireable<string>;
-            text: PropTypes.Validator<string>;
-        }> | null | undefined)[]>;
-        linkComponent: PropTypes.Requireable<string | ((...args: any[]) => any)>;
-        className: PropTypes.Requireable<string>;
-    };
-};
+export declare const Breadcrumbs: ({ label, items, className, ...attributeOptions }: BreadcrumbProps) => JSX.Element;
 export interface BreadcrumbLinkListItemProps {
     /**
      * The link Text or link html
@@ -54,16 +42,7 @@ export interface BreadcrumbLinkListItemProps {
     href?: string;
     to?: string;
 }
-export declare const BreadcrumbLinkListItem: {
-    ({ text, link, linkComponent, children, onClick, ...attributeOptions }: BreadcrumbLinkListItemProps): JSX.Element;
-    propTypes: {
-        text: PropTypes.Validator<string | number | boolean | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
-        link: PropTypes.Requireable<string>;
-        onClick: PropTypes.Requireable<(...args: any[]) => any>;
-        children: PropTypes.Requireable<PropTypes.ReactNodeLike>;
-        linkComponent: PropTypes.Requireable<string | ((...args: any[]) => any)>;
-    };
-};
+export declare const BreadcrumbLinkListItem: ({ text, link, linkComponent, children, onClick, ...attributeOptions }: BreadcrumbLinkListItemProps) => JSX.Element;
 /**
  * DEFAULT
  * The Link List component

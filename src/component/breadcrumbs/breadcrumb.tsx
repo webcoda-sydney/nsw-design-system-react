@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types'
 import type { ElementType, ReactNode } from 'react'
 
 export interface BreadcrumbProps {
@@ -26,7 +25,6 @@ export interface BreadcrumbProps {
 export const Breadcrumbs = ({
     label,
     items,
-    linkComponent = 'a',
     className = '',
     ...attributeOptions
 }: BreadcrumbProps) => (
@@ -37,23 +35,22 @@ export const Breadcrumbs = ({
     >
         <BreadcrumbLinkList
             inline
-            linkComponent={linkComponent}
             items={items}
         />
     </nav>
 )
 
-Breadcrumbs.propTypes = {
-    label: PropTypes.string,
-    items: PropTypes.arrayOf(
-        PropTypes.shape({
-            link: PropTypes.string,
-            text: PropTypes.string.isRequired
-        })
-    ).isRequired,
-    linkComponent: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
-    className: PropTypes.string
-}
+// Breadcrumbs.propTypes = {
+//     label: PropTypes.string,
+//     items: PropTypes.arrayOf(
+//         PropTypes.shape({
+//             link: PropTypes.string,
+//             text: PropTypes.string.isRequired
+//         })
+//     ).isRequired,
+//     linkComponent: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+//     className: PropTypes.string
+// }
 
 export interface BreadcrumbLinkListItemProps {
 	/**
@@ -130,13 +127,13 @@ export const BreadcrumbLinkListItem = ({
     )
 }
 
-BreadcrumbLinkListItem.propTypes = {
-    text: PropTypes.node.isRequired,
-    link: PropTypes.string,
-    onClick: PropTypes.func,
-    children: PropTypes.node,
-    linkComponent: PropTypes.oneOfType([PropTypes.string, PropTypes.func])
-}
+// BreadcrumbLinkListItem.propTypes = {
+//     text: PropTypes.node.isRequired,
+//     link: PropTypes.string,
+//     onClick: PropTypes.func,
+//     children: PropTypes.node,
+//     linkComponent: PropTypes.oneOfType([PropTypes.string, PropTypes.func])
+// }
 
 /**
  * DEFAULT

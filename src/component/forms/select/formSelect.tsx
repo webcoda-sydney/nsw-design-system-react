@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ComponentPropsWithoutRef } from 'react'
 import PropTypes from 'prop-types'
 import nextId from 'react-id-generator'
 import { FormGroup, FormGroupProps, FormHelperProps } from '../group-elements'
@@ -22,7 +22,7 @@ SelectItem.propTypes = {
  * DEFAULT
  * The select component
  * */
-export interface SelectProps {
+export interface SelectProps extends ComponentPropsWithoutRef<"select"> {
 	/**
 	 * The options for the select, format: { value: '', text: '' }
 	 */
@@ -45,6 +45,7 @@ export interface SelectProps {
 	selected?: string
 
 	htmlId?: string
+	placeholder?: string
 }
 export const Select = ({
 	htmlId,
@@ -53,6 +54,7 @@ export const Select = ({
 	block,
 	status = 'default',
 	className = '',
+	placeholder,
 	...attributeOptions
 }: SelectProps) => (
 	<select
@@ -67,6 +69,7 @@ export const Select = ({
 		defaultValue={selected}
 		{...attributeOptions}
 	>
+		{!!placeholder && <option value=''>{placeholder}</option>}
 		{options.map((option) => (
 			<SelectItem key={option.value} {...option} />
 		))}
@@ -91,7 +94,7 @@ Select.propTypes = {
  * The text group component
  *
  */
-export type  FormGroupSelectProps = FormGroupProps & SelectProps
+export type FormGroupSelectProps = FormGroupProps & SelectProps
 export const FormGroupSelect = ({
 	status = 'default',
 	selected,
@@ -99,7 +102,10 @@ export const FormGroupSelect = ({
 	label,
 	helper,
 	options,
-	htmlId =  defHtmlId,
+	htmlId = defHtmlId,
+	placeholder = 'Please select',
+	hideLabel,
+	...attrs
 }: FormGroupSelectProps) => (
 	<FormGroup
 		status={status}
@@ -107,8 +113,14 @@ export const FormGroupSelect = ({
 		label={label}
 		helper={helper}
 		htmlId={htmlId}
+		hideLabel={hideLabel}
 	>
-		<Select options={options} selected={selected} />
+		<Select
+			{...attrs}
+			options={options}
+			selected={selected}
+			placeholder={placeholder}
+		/>
 	</FormGroup>
 )
 

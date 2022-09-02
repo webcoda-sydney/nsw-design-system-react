@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
-import type { ButtonHTMLAttributes } from 'react';
-export interface ButtonProps {
+import type { ButtonHTMLAttributes, ComponentPropsWithoutRef, ReactNode } from 'react';
+export declare type ButtonProps = (ComponentPropsWithoutRef<'button'> | ComponentPropsWithoutRef<'href'>) & {
     /**
      * The component used for the link
      */
@@ -12,7 +12,7 @@ export interface ButtonProps {
     /**
      * Anything inside
      */
-    children: string;
+    children: ReactNode;
     /**
      * The button style
      */
@@ -34,7 +34,7 @@ export interface ButtonProps {
      */
     href?: string;
     to?: string;
-}
+};
 export declare const Button: {
     ({ linkComponent, link, children, style, type, block, className, ...attributeOptions }: ButtonProps): JSX.Element;
     propTypes: {

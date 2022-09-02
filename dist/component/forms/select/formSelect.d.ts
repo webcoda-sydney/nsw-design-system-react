@@ -1,3 +1,4 @@
+import { ComponentPropsWithoutRef } from 'react';
 import PropTypes from 'prop-types';
 import { FormGroupProps, FormHelperProps } from '../group-elements';
 import type { FormOption } from '..';
@@ -15,7 +16,7 @@ export declare const SelectItem: {
  * DEFAULT
  * The select component
  * */
-export interface SelectProps {
+export interface SelectProps extends ComponentPropsWithoutRef<"select"> {
     /**
      * The options for the select, format: { value: '', text: '' }
      */
@@ -37,9 +38,10 @@ export interface SelectProps {
      */
     selected?: string;
     htmlId?: string;
+    placeholder?: string;
 }
 export declare const Select: {
-    ({ htmlId, selected, options, block, status, className, ...attributeOptions }: SelectProps): JSX.Element;
+    ({ htmlId, selected, options, block, status, className, placeholder, ...attributeOptions }: SelectProps): JSX.Element;
     propTypes: {
         options: PropTypes.Validator<(PropTypes.InferProps<{
             value: PropTypes.Validator<string>;
@@ -58,7 +60,7 @@ export declare const Select: {
  */
 export declare type FormGroupSelectProps = FormGroupProps & SelectProps;
 export declare const FormGroupSelect: {
-    ({ status, selected, statusText, label, helper, options, htmlId, }: FormGroupSelectProps): JSX.Element;
+    ({ status, selected, statusText, label, helper, options, htmlId, placeholder, hideLabel, ...attrs }: FormGroupSelectProps): JSX.Element;
     propTypes: {
         status: PropTypes.Requireable<string>;
         statusText: PropTypes.Requireable<string>;

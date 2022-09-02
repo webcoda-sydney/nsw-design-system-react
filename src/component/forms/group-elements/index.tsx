@@ -87,6 +87,11 @@ export interface FormLabelProps {
 	 * An additional class, optional
 	 */
 	className?: string
+
+	/**
+	 * Is sreen-reader only
+	 */
+	isSrOnly?: boolean
 }
 export const FormLabel = ({
 	htmlFor,
@@ -94,24 +99,25 @@ export const FormLabel = ({
 	dark,
 	inline,
 	className = '',
+	isSrOnly = false,
 	...attributeOptions
 }: FormLabelProps) => (
 	<label
 		htmlFor={htmlFor}
-		className={`nsw-form__label ${className}`}
+		className={isSrOnly ? 'sr-only' : `nsw-form__label ${className}`}
 		{...attributeOptions}
 	>
 		{text}
 	</label>
 )
 
-FormLabel.propTypes = {
-	text: PropTypes.string.isRequired,
-	dark: PropTypes.bool,
-	inline: PropTypes.bool,
-	className: PropTypes.string,
-	htmlFor: PropTypes.string
-}
+// FormLabel.propTypes = {
+// 	text: PropTypes.string.isRequired,
+// 	dark: PropTypes.bool,
+// 	inline: PropTypes.bool,
+// 	className: PropTypes.string,
+// 	htmlFor: PropTypes.string
+// }
 
 /**
  * The form group component
@@ -152,6 +158,13 @@ export interface FormGroupProps {
 	htmlId?: string
 
 	children?: ReactNode
+
+	/**
+	 * Hide label but readable for screen-reader
+	 */
+	hideLabel?: boolean
+	isInputGroup?: boolean
+	isInputGroupIcon?: boolean
 }
 
 export const FormGroup = ({
@@ -163,32 +176,42 @@ export const FormGroup = ({
 	statusText,
 	error,
 	className = '',
+	hideLabel = false,
+	isInputGroup = false,
+	isInputGroupIcon = false,
 	...attributeOptions
 }: FormGroupProps) => (
 	<div className={`nsw-form__group ${className}`} {...attributeOptions}>
-		<FormLabel htmlFor={htmlId} text={label} />
-		{helper ? <FormHelper htmlId={htmlId}>{helper}</FormHelper> : ''}
-		{React.Children.map(children, (child) =>
-			React.cloneElement(child as any, { error })
-		)}
-		{status ? (
-			<FormHelper htmlId={htmlId} status={status}>
-				{statusText}
-			</FormHelper>
-		) : (
-			''
-		)}
+		<div className={`${isInputGroup ? 'nsw-form__input-group' : ''} ${isInputGroupIcon ? 'nsw-form__input-group nsw-form__input-group--icon' : ''}`}>
+			<FormLabel
+				htmlFor={htmlId}
+				text={label}
+				isSrOnly={hideLabel}
+			/>
+			{helper ? <FormHelper htmlId={htmlId}>{helper}</FormHelper> : ''}
+			{React.Children.map(children, (child) => {
+				if(!child) {return null}
+				return React.cloneElement(child as any, { error })
+			})?.filter(item => !!item)}
+			{status ? (
+				<FormHelper htmlId={htmlId} status={status}>
+					{statusText}
+				</FormHelper>
+			) : (
+				''
+			)}
+		</div>
 	</div>
 )
 
-FormGroup.propTypes = {
-	status: PropTypes.oneOf(['invalid', 'valid', 'default']),
-	error: PropTypes.bool,
-	className: PropTypes.string,
-	htmlId: PropTypes.string,
-	label: PropTypes.string,
-	children: PropTypes.node,
-	helper: PropTypes.string,
-	statusText: PropTypes.string,
-	uniqueID: PropTypes.func
-}
+// FormGroup.propTypes = {
+// 	status: PropTypes.oneOf(['invalid', 'valid', 'default']),
+// 	error: PropTypes.bool,
+// 	className: PropTypes.string,
+// 	htmlId: PropTypes.string,
+// 	label: PropTypes.string,
+// 	children: PropTypes.node,
+// 	helper: PropTypes.string,
+// 	statusText: PropTypes.string,
+// 	uniqueID: PropTypes.func
+// }

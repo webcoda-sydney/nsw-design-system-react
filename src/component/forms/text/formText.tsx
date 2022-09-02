@@ -1,16 +1,13 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import type { ComponentPropsWithoutRef, ReactNode } from 'react'
 import nextId from 'react-id-generator'
-import { FormGroup, FormHelperProps } from '../group-elements'
-import type { FormOption } from '..'
+import { FormGroup, FormGroupProps, FormHelperProps } from '../group-elements'
 
 /**
  * DEFAULT
  * The TextInput component
  *
  */
-export interface TextInputProps
-	extends Pick<FormHelperProps, 'status' | 'htmlId' | 'className'> {
+export type TextInputProps = (ComponentPropsWithoutRef<'input'> | ComponentPropsWithoutRef<'textarea'>) & {
 	/**
 	 * The kind of input, can be either 'input' or 'textarea', default: 'input'
 	 */
@@ -27,6 +24,9 @@ export interface TextInputProps
 	 * The type of the field, optional, default: text
 	 */
 	type?: string
+
+	status?: FormHelperProps['status']
+	htmlId?: FormHelperProps['htmlId']
 }
 export const TextInput = ({
 	as = 'input',
@@ -37,9 +37,10 @@ export const TextInput = ({
 	type = 'text',
 	className = '',
 	...attributeOptions
-}: TextInputProps) =>
-	as === 'textarea' ? (
-		<textarea
+}: TextInputProps) => {
+	if(as === 'textarea') {
+		return (
+				<textarea
 			className={
 				`nsw-form__input ${className}` +
 				`${block ? ' nsw-form__input--block' : ''}` +
@@ -52,9 +53,12 @@ export const TextInput = ({
 					: `helper${htmlId}`
 			}
 			id={htmlId}
-			{...attributeOptions}
+			{...attributeOptions as ComponentPropsWithoutRef<'textarea'>}
 		/>
-	) : (
+		)
+	}
+
+	return (
 		<input
 			className={
 				`nsw-form__input ${className}` +
@@ -68,26 +72,26 @@ export const TextInput = ({
 					: `helper${htmlId}`
 			}
 			type={type}
-			{...attributeOptions}
+			{...(attributeOptions as ComponentPropsWithoutRef<'input'>)}
 			id={htmlId}
 		/>
 	)
-
-TextInput.propTypes = {
-	as: PropTypes.oneOf(['input', 'text', 'textarea']),
-	block: PropTypes.bool,
-	number: PropTypes.bool,
-	className: PropTypes.string,
-	htmlId: PropTypes.string,
-	status: PropTypes.oneOf(['valid', 'invalid', 'default']),
-	type: PropTypes.string
 }
+
+// TextInput.propTypes = {
+// 	as: PropTypes.oneOf(['input', 'text', 'textarea']),
+// 	block: PropTypes.bool,
+// 	number: PropTypes.bool,
+// 	className: PropTypes.string,
+// 	htmlId: PropTypes.string,
+// 	status: PropTypes.oneOf(['valid', 'invalid', 'default']),
+// 	type: PropTypes.string
+// }
 /**
  * The text group component
  *
  */
-export interface FormGroupTextProps
-	extends Pick<TextInputProps, 'as' | 'htmlId' | 'status'> {
+export type FormGroupTextProps = TextInputProps & {
 	/**
 	 * Text for error message
 	 */
@@ -99,7 +103,7 @@ export interface FormGroupTextProps
 	/**
 	 * Text for helper
 	 */
-	helper: string
+	helper?: FormGroupProps['helper']
 	/**
 	 * An additional class, optional
 	 */
@@ -109,6 +113,11 @@ export interface FormGroupTextProps
 	 * Input type
 	 */
 	inputType?: string
+	children?: ReactNode
+	isInputGroup?: FormGroupProps['isInputGroup']
+	isInputGroupIcon?: FormGroupProps['isInputGroupIcon']
+	hideLabel: FormGroupProps['hideLabel']
+	placeholder?: string
 }
 export const FormGroupText = ({
 	status = 'default',
@@ -119,14 +128,22 @@ export const FormGroupText = ({
 	helper,
 	htmlId = nextId(),
 	as,
+	children,
+	isInputGroup = false,
+	isInputGroupIcon = false,
+	hideLabel,
 	...attributeOptions
 }: FormGroupTextProps) => (
 	<FormGroup
+		className={className}
 		status={status}
 		statusText={statusText}
 		label={label}
 		helper={helper}
 		htmlId={htmlId}
+		isInputGroup={isInputGroup}
+		isInputGroupIcon={isInputGroupIcon}
+		hideLabel={hideLabel}
 	>
 		<TextInput
 			{...attributeOptions}
@@ -135,16 +152,17 @@ export const FormGroupText = ({
 			htmlId={htmlId}
 			type={inputType}
 		/>
+		{children}
 	</FormGroup>
 )
 
-FormGroupText.propTypes = {
-	status: PropTypes.oneOf(['valid', 'invalid', 'default']),
-	className: PropTypes.string,
-	as: PropTypes.oneOf(['input', 'textarea']),
-	statusText: PropTypes.string,
-	label: PropTypes.string,
-	helper: PropTypes.string,
-	htmlId: PropTypes.string,
-	inputType: PropTypes.string
-}
+// FormGroupText.propTypes = {
+// 	status: PropTypes.oneOf(['valid', 'invalid', 'default']),
+// 	className: PropTypes.string,
+// 	as: PropTypes.oneOf(['input', 'textarea']),
+// 	statusText: PropTypes.string,
+// 	label: PropTypes.string,
+// 	helper: PropTypes.string,
+// 	htmlId: PropTypes.string,
+// 	inputType: PropTypes.string
+// }
