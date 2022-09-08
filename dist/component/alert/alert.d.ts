@@ -1,5 +1,4 @@
 import type { ReactNode } from 'react';
-import PropTypes from 'prop-types';
 export interface AlertProps {
     /**
      * Alert title
@@ -25,14 +24,7 @@ export interface AlertProps {
      *  An additional class, optional
      */
     className?: string;
+    compact?: boolean;
 }
-export declare const Alert: {
-    ({ title, as, children, className, ...attributeOptions }: AlertProps): JSX.Element;
-    propTypes: {
-        as: PropTypes.Validator<string>;
-        children: PropTypes.Validator<string | number | boolean | PropTypes.ReactElementLike | PropTypes.ReactNodeArray>;
-        className: PropTypes.Requireable<string>;
-        title: PropTypes.Requireable<string>;
-    };
-};
+export declare const Alert: ({ title, as, children, className, compact, ...attributeOptions }: AlertProps) => JSX.Element;
 export default Alert;

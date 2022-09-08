@@ -90,5 +90,4 @@ export {
   TabItem,
   TabSection,
   TagList,
-  HeaderProps,
 }

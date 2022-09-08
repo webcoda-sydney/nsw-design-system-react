@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import type { ButtonHTMLAttributes, ComponentPropsWithoutRef, ElementType, ReactNode } from 'react'
 
-export type ButtonProps = (ComponentPropsWithoutRef<'button'> | ComponentPropsWithoutRef<'href'>)  & {
+export type ButtonProps = (ComponentPropsWithoutRef<'button'> | ComponentPropsWithoutRef<'a'>)  & {
 	/**
 	 * The component used for the link
 	 */
@@ -46,7 +46,7 @@ export type ButtonProps = (ComponentPropsWithoutRef<'button'> | ComponentPropsWi
 }
 
 export const Button = ({
-    linkComponent = 'a',
+    linkComponent = 'button',
     link,
     children,
     style = 'dark',
@@ -60,7 +60,7 @@ export const Button = ({
 
         // If we are using a normal link
         if (LinkComponent === 'a') {
-            attributeOptions.href = link
+            attributeOptions.href = link || attributeOptions.href
             // If we are using a link component
         }
 		else if (typeof LinkComponent === 'function') {

@@ -45,6 +45,7 @@ export interface CardProps {
      */
     className?: string;
     href?: string;
+    target?: string;
     children?: ReactNode;
     linkComponent?: string | ElementType;
 }

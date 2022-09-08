@@ -55,6 +55,8 @@ export interface AlertProps {
      *  An additional class, optional
      */
     className?: string
+
+	compact?: boolean
 }
 
 export const Alert = ({
@@ -62,10 +64,11 @@ export const Alert = ({
   as,
   children,
   className = '',
+  compact=false,
   ...attributeOptions
 }: AlertProps) => (
   <div
-    className={`nsw-in-page-alert ${className} ${options[as]}`}
+    className={`nsw-in-page-alert ${className} ${options[as]} ${compact ? 'nsw-in-page-alert--compact' : ''}`.trim()}
     {...attributeOptions}
   >
     <span
@@ -80,11 +83,11 @@ export const Alert = ({
   </div>
 );
 
-Alert.propTypes = {
-  as: PropTypes.oneOf(['info', 'warning', 'error', 'success']).isRequired,
-  children: PropTypes.node.isRequired,
-  className: PropTypes.string,
-  title: PropTypes.string,
-};
+// Alert.propTypes = {
+//   as: PropTypes.oneOf(['info', 'warning', 'error', 'success']).isRequired,
+//   children: PropTypes.node.isRequired,
+//   className: PropTypes.string,
+//   title: PropTypes.string,
+// };
 
 export default Alert;

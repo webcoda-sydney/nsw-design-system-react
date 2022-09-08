@@ -58,6 +58,7 @@ export interface CardProps {
 	className?: string
 
 	href?: string
+	target?: string
 
 	children?: ReactNode
 
@@ -79,6 +80,7 @@ const Card = ({
 	linkComponent: LinkComponent = 'a',
 	...attributesOptions
 }: CardProps) => {
+	const { href, target, ...otherAttrs } = attributesOptions
 	let CardContainer = 'div' as ElementType
 
 	if (link !== undefined) {
@@ -105,7 +107,7 @@ const Card = ({
 				`${headline && !children ? 'nsw-card--headline' : ''} ` +
 				`${highlight ? 'nsw-card--highlight' : ''} `
 			}
-			{...attributesOptions}
+			{...otherAttrs}
 		>
 			{renderImage()}
 			<CardContent>

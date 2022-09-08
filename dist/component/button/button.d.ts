@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import type { ButtonHTMLAttributes, ComponentPropsWithoutRef, ReactNode } from 'react';
-export declare type ButtonProps = (ComponentPropsWithoutRef<'button'> | ComponentPropsWithoutRef<'href'>) & {
+export declare type ButtonProps = (ComponentPropsWithoutRef<'button'> | ComponentPropsWithoutRef<'a'>) & {
     /**
      * The component used for the link
      */
