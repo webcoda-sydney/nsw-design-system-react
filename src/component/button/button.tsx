@@ -1,5 +1,4 @@
-import PropTypes from 'prop-types'
-import type { ButtonHTMLAttributes, ComponentPropsWithoutRef, ElementType, ReactNode } from 'react'
+import { ButtonHTMLAttributes, ComponentPropsWithoutRef, ElementType, ForwardedRef, forwardRef, ReactNode } from 'react'
 
 export type ButtonProps = (ComponentPropsWithoutRef<'button'> | ComponentPropsWithoutRef<'a'>)  & {
 	/**
@@ -45,7 +44,7 @@ export type ButtonProps = (ComponentPropsWithoutRef<'button'> | ComponentPropsWi
 	to?: string
 }
 
-export const Button = ({
+export const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(({
     linkComponent = 'button',
     link,
     children,
@@ -54,7 +53,7 @@ export const Button = ({
     block,
     className = '',
     ...attributeOptions
-}: ButtonProps) => {
+}, ref) => {
     if (link) {
         const LinkComponent = linkComponent as ElementType
 
@@ -69,6 +68,7 @@ export const Button = ({
 
         return (
             <LinkComponent
+				ref={ref as ForwardedRef<HTMLAnchorElement>}
                 className={`nsw-button ${className} nsw-button--${style}${
                     block ? ' nsw-button--block' : ''
                 }`}
@@ -81,6 +81,7 @@ export const Button = ({
 
     return (
         <button
+			ref={ref as ForwardedRef<HTMLButtonElement>}
             type={type}
             className={`nsw-button ${className} nsw-button--${style}${
                 block ? ' nsw-button--block' : ''
@@ -90,24 +91,24 @@ export const Button = ({
             {children}
         </button>
     )
-}
+})
 
-Button.propTypes = {
-    link: PropTypes.string,
-    children: PropTypes.node.isRequired,
-    style: PropTypes.oneOf([
-        'dark',
-        'dark-outline',
-        'dark-outline-solid',
-        'light',
-        'light-outline',
-        'white',
-        'danger'
-    ]),
-    type: PropTypes.string,
-    block: PropTypes.bool,
-    linkComponent: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
-    className: PropTypes.string
-}
+// Button.propTypes = {
+//     link: PropTypes.string,
+//     children: PropTypes.node.isRequired,
+//     style: PropTypes.oneOf([
+//         'dark',
+//         'dark-outline',
+//         'dark-outline-solid',
+//         'light',
+//         'light-outline',
+//         'white',
+//         'danger'
+//     ]),
+//     type: PropTypes.string,
+//     block: PropTypes.bool,
+//     linkComponent: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+//     className: PropTypes.string
+// }
 
 export default Button
