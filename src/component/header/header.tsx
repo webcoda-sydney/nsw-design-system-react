@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, Fragment, ElementType } from 'react'
 import PropTypes from 'prop-types'
+import Icon from '../Icon'
 
 /**
  * Displays across the top of all NSW Government sites
@@ -133,12 +134,7 @@ export const Header = (props: HeaderProps) => {
 									aria-expanded='false'
 									aria-controls='main-nav'
 								>
-									<span
-										className='material-icons nsw-material-icons'
-										aria-hidden='true'
-									>
-										menu
-									</span>
+									<Icon icon='ic:baseline-menu' />
 									<span>
 										<span className='sr-only'>Open</span>{' '}
 										Menu
@@ -157,12 +153,7 @@ export const Header = (props: HeaderProps) => {
 									aria-expanded='false'
 									aria-controls='header-search'
 								>
-									<span
-										className='material-icons nsw-material-icons'
-										aria-hidden='true'
-									>
-										search
-									</span>
+									<Icon icon='ic:baseline-search' />
 									<span className='nsw-header-btn__sub'>
 										<span className='sr-only'>Show</span>{' '}
 										Search
@@ -198,12 +189,7 @@ export const Header = (props: HeaderProps) => {
 									type='submit'
 									aria-label='search'
 								>
-									<span
-										className='material-icons nsw-material-icons'
-										aria-hidden='true'
-									>
-										search
-									</span>
+									<Icon icon='ic:baseline-search' />
 								</button>
 							</form>
 							<button
@@ -212,12 +198,7 @@ export const Header = (props: HeaderProps) => {
 								aria-expanded='true'
 								aria-controls='header-search'
 							>
-								<span
-									className='material-icons nsw-material-icons nsw-search__close-icon'
-									aria-hidden='true'
-								>
-									close
-								</span>
+								<Icon icon='ic:baseline-close' className='nsw-search__close-icon' />
 								<span className='sr-only'>Close search</span>
 							</button>
 						</div>

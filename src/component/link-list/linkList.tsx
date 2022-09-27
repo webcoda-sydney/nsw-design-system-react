@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import type { ElementType, ReactNode } from 'react'
+import Icon from '../Icon'
 
 /**
  * An item inside the LinkList component
@@ -73,12 +74,7 @@ export const LinkListItem = ({
 			<li className='nsw-link-list__item'>
 				<LinkComponent {...attributeOptions}>
 					<span>{text}</span>
-					<span
-						className='material-icons nsw-material-icons nsw-link-list__icon'
-						aria-hidden='true'
-					>
-						east
-					</span>
+					<Icon icon='ic:baseline-east' className="nsw-link-list__icon" />
 				</LinkComponent>
 				{children}
 			</li>

@@ -1,5 +1,6 @@
 import { useRef, useEffect, ReactNode } from 'react'
 import PropTypes from 'prop-types'
+import Icon from '../Icon'
 
 /**
  * All different kind of button options
@@ -51,16 +52,12 @@ export const GlobalAlert = (props: GlobalAlertProps) => {
 	return (
 		<div
 			ref={ref}
-			className={`nsw-global-alert ${className} ${
-				options[as]
-			}`}
+			className={`nsw-global-alert ${className} ${options[as]}`}
 			{...attributeOptions}
 		>
 			<div className='nsw-global-alert__wrapper'>
 				<div className='nsw-global-alert__content'>
-					<div className='nsw-global-alert__title'>
-						{title}
-					</div>
+					<div className='nsw-global-alert__title'>{title}</div>
 					<p>{content}</p>
 				</div>
 				<p>
@@ -68,9 +65,7 @@ export const GlobalAlert = (props: GlobalAlertProps) => {
 						<a
 							href={ctaHref}
 							className={
-								as
-									? buttonStyles[as]
-									: buttonStyles['default']
+								as ? buttonStyles[as] : buttonStyles['default']
 							}
 						>
 							{ctaText}
@@ -83,12 +78,7 @@ export const GlobalAlert = (props: GlobalAlertProps) => {
 					type='button'
 					className='nsw-icon-button js-close-alert'
 				>
-					<span
-						className='material-icons nsw-material-icons'
-						aria-hidden='true'
-					>
-						close
-					</span>
+					<Icon icon="ic:baseline-close" />
 					<span className='sr-only'>Close message</span>
 				</button>
 			</div>

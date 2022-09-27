@@ -61,5 +61,9 @@
 	},
 	"files": [
 		"dist"
-	]
+	],
+	"dependencies": {
+		"@iconify/react": "^4.0.0",
+		"clsx": "^1.2.1"
+	}
 }

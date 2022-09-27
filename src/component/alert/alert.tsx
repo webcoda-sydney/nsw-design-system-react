@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import PropTypes from 'prop-types';
+import Icon from '../Icon';
 
 /**
  * All different kind of alerts
@@ -19,11 +20,11 @@ const options = {
  * @type {Object}
  */
 const icons = {
-  info: 'info',
-  warning: 'cancel',
-  error: 'error',
-  success: 'check_circle',
-};
+	info: 'ic:baseline-info',
+	warning: 'ic:baseline-cancel',
+	error: 'ic:baseline-error',
+	success: 'ic:baseline-check-circle'
+}
 
 export interface AlertProps {
     /**
@@ -60,28 +61,29 @@ export interface AlertProps {
 }
 
 export const Alert = ({
-  title = '',
-  as,
-  children,
-  className = '',
-  compact=false,
-  ...attributeOptions
+	title = '',
+	as,
+	children,
+	className = '',
+	compact = false,
+	...attributeOptions
 }: AlertProps) => (
-  <div
-    className={`nsw-in-page-alert ${className} ${options[as]} ${compact ? 'nsw-in-page-alert--compact' : ''}`.trim()}
-    {...attributeOptions}
-  >
-    <span
-      className="material-icons nsw-material-icons nsw-in-page-alert__icon"
-    >
-      {icons[as]}
-    </span>
-    <div className="nsw-in-page-alert__content">
-      <h4>{title}</h4>
-      {children}
-    </div>
-  </div>
-);
+	<div
+		className={`nsw-in-page-alert ${className} ${options[as]} ${
+			compact ? 'nsw-in-page-alert--compact' : ''
+		}`.trim()}
+		{...attributeOptions}
+	>
+		<Icon
+			icon={icons[as]}
+			className='nsw-in-page-alert__icon'
+		/>
+		<div className='nsw-in-page-alert__content'>
+			<h4>{title}</h4>
+			{children}
+		</div>
+	</div>
+)
 
 // Alert.propTypes = {
 //   as: PropTypes.oneOf(['info', 'warning', 'error', 'success']).isRequired,

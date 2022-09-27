@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import { ElementType, ReactNode, useEffect, useRef } from 'react'
 import useIdExtended from '@/hooks/useIdExtended'
 import useBreakpoint from 'use-breakpoint'
+import Icon from '../Icon'
 
 export interface NavItem {
 	id?: string
@@ -99,12 +100,7 @@ export const MainNav = (props: MainNavProps) => {
 					className='nsw-icon-button js-close-nav'
 					aria-expanded='true'
 				>
-					<span
-						className='material-icons nsw-material-icons'
-						aria-hidden='true'
-					>
-						close
-					</span>
+					<Icon icon="ic:baseline-close" />
 					<span className='sr-only'>Close Menu</span>
 				</button>
 			</div>
@@ -126,12 +122,11 @@ export const MainNav = (props: MainNavProps) => {
 								>
 									<span>{navItem.text}</span>
 									{!!navItem.subNav?.length ? (
-										<span
-											className='material-icons nsw-material-icons nsw-main-nav__link-icon'
-											aria-hidden='true'
+										<Icon
+											icon='ic:baseline-keyboard-arrow-right'
+											className='nsw-main-nav__link-icon'
 										>
-											keyboard_arrow_right
-										</span>
+										</Icon>
 									) : (
 										''
 									)}
@@ -189,12 +184,7 @@ export const SubNavHeader = ({
 				aria-controls={`sub-nav-${id}`}
 				aria-expanded='true'
 			>
-				<span
-					className='material-icons nsw-material-icons'
-					aria-hidden='true'
-				>
-					keyboard_arrow_left
-				</span>
+				<Icon icon='ic:baseline-keyboard-arrow-left' />
 				<span>
 					Back
 					<span className='sr-only'> to previous menu</span>
@@ -205,24 +195,14 @@ export const SubNavHeader = ({
 				className='nsw-icon-button js-close-nav'
 				aria-expanded='true'
 			>
-				<i
-					className='material-icons nsw-material-icons'
-					aria-hidden='true'
-				>
-					close
-				</i>
+				<Icon icon='ic:baseline-close' />
 				<span className='sr-only'>Close Menu</span>
 			</button>
 		</div>
 		<div className='nsw-main-nav__title'>
 			<LinkComponent href={url} target={target}>
 				<span>{text}</span>
-				<span
-					className='material-icons nsw-material-icons'
-					aria-hidden='true'
-				>
-					east
-				</span>
+				<Icon icon='ic:baseline-east' />
 			</LinkComponent>
 		</div>
 		<div className='nsw-main-nav__description'>{description}</div>
@@ -269,12 +249,10 @@ export const SubNav = ({
 								>
 									<span>{subNavItem.text}</span>
 									{!!subNavItem.subNav?.length ? (
-										<span
-											className='material-icons nsw-material-icons nsw-main-nav__link-icon'
-											aria-hidden='true'
-										>
-											keyboard_arrow_right
-										</span>
+										<Icon
+											icon='ic:baseline-keyboard-arrow-right'
+											className='nsw-main-nav__link-icon'
+										/>
 									) : (
 										''
 									)}
@@ -300,27 +278,33 @@ export const SubNav = ({
 													const SubLinkComponent = subSubNavItem.linkComponent || 'a'
 													return (
 														<li
-															key={subSubNavItem.url +
+															key={
+																subSubNavItem.url +
 																subSubNavItem.text +
-																index}
+																index
+															}
 														>
 															<SubLinkComponent
-																href={subSubNavItem.url}
-																target={subSubNavItem.target}
+																href={
+																	subSubNavItem.url
+																}
+																target={
+																	subSubNavItem.target
+																}
 																className='nsw-subnavigation__link'
 															>
 																<span>
-																	{subSubNavItem.text}
+																	{
+																		subSubNavItem.text
+																	}
 																</span>
 																{!!subSubNavItem
 																	.subNav
 																	?.length ? (
-																	<span
-																		className='material-icons nsw-material-icons nsw-main-nav__link-icon'
-																		aria-hidden='true'
-																	>
-																		keyboard_arrow_right
-																	</span>
+																	<Icon
+																		icon='ic:baseline-keyboard-arrow-right'
+																		className='nsw-main-nav__link-icon'
+																	/>
 																) : (
 																	''
 																)}

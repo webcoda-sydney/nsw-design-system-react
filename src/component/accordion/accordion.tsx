@@ -1,7 +1,7 @@
 import { Fragment, ReactNode, useState } from 'react'
 import PropTypes from 'prop-types'
 import useIdExtended from '@/hooks/useIdExtended'
-
+import Icon from '../Icon'
 export interface AccordionProps {
     header: ReactNode
     body: ReactNode
@@ -15,31 +15,29 @@ export const Accordion = (props: AccordionProps) => {
     const { header, body, closed, className = '', ...attributeOptions } = props
 
     return (
-        <Fragment>
-            <div className='nsw-accordion__title'>
-                <button
-                    type='button'
-                    aria-expanded={isOpen}
-                    aria-controls={uID}
-                    className={`nsw-accordion__button ${
-                        isOpen ? 'is-open' : ''
-                    }`}
-                    onClick={() => setIsOpen((prevState) => !prevState)}
-                >
-                    {header}
-                    <i
-                        className='material-icons nsw-material-icons nsw-accordion__icon'
-                        aria-hidden='true'
-                    >
-                        keyboard_arrow_down
-                    </i>
-                </button>
-            </div>
-            <div className='nsw-accordion__content' id={uID} hidden={!isOpen}>
-                <div className='nsw-wysiwyg-content'>{body}</div>
-            </div>
-        </Fragment>
-    )
+		<Fragment>
+			<div className='nsw-accordion__title'>
+				<button
+					type='button'
+					aria-expanded={isOpen}
+					aria-controls={uID}
+					className={`nsw-accordion__button ${
+						isOpen ? 'is-open' : ''
+					}`}
+					onClick={() => setIsOpen((prevState) => !prevState)}
+				>
+					{header}
+					<Icon
+						icon='ic:baseline-keyboard-arrow-down'
+						className='nsw-accordion__icon'
+					/>
+				</button>
+			</div>
+			<div className='nsw-accordion__content' id={uID} hidden={!isOpen}>
+				<div className='nsw-wysiwyg-content'>{body}</div>
+			</div>
+		</Fragment>
+	)
 }
 
 Accordion.propTypes = {

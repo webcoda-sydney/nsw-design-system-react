@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react'
 import PropTypes from 'prop-types'
 import nextId from 'react-id-generator'
 import type { FormOption } from '..'
+import Icon from '@/component/Icon'
 
 const defHtmlId = nextId()
 
@@ -30,6 +31,12 @@ export interface FormHelperProps {
 	 */
 	className?: string
 }
+
+const icons = {
+	invalid: 'ic:baseline-cancel',
+	valid: 'ic:baseline-check-circle',
+}
+
 export const FormHelper = ({
 	htmlId = defHtmlId,
 	children,
@@ -44,10 +51,13 @@ export const FormHelper = ({
 		} ${status === 'valid' ? ' nsw-form__helper--valid' : ''} ${className}`}
 		{...attributeOptions}
 	>
-		<span className='material-icons nsw-material-icons' aria-hidden='true'>
-			{status === 'invalid' ? 'cancel' : ''}
-			{status === 'valid' ? 'check_circle' : ''}
-		</span>
+		{
+			(status === 'invalid' || status === 'valid') && (
+				<Icon
+					icon={icons[status]}
+				/>
+			)
+		}
 		{children}
 	</span>
 )

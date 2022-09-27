@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import type { ElementType, ReactNode } from 'react'
+import Icon from '../Icon'
 
 /**
  * The card  component
@@ -148,12 +149,7 @@ export const CardContent = ({
 }: CardContentProps) => (
 	<div className={`nsw-card__content ${className}`} {...attributesOptions}>
 		{children}
-		<span
-			className='material-icons nsw-material-icons nsw-card__icon'
-			aria-hidden='true'
-		>
-			east
-		</span>
+		<Icon icon='ic:baseline-east' className='nsw-card__icon' />
 	</div>
 )
 

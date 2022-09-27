@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import type { ReactNode } from 'react'
+import Icon from '../Icon'
 
 export interface PaginationItem {
 	url: string
@@ -46,12 +47,7 @@ export const Pagination = ({
 			<ul>
 				<li>
 					<a className='nsw-icon-button' href={backLink}>
-						<span
-							className='material-icons nsw-material-icons'
-							aria-hidden='true'
-						>
-							keyboard_arrow_left
-						</span>
+						<Icon icon='ic:baseline-keyboard-arrow-left' />
 						<span className='sr-only'>Back</span>
 					</a>
 				</li>
@@ -68,12 +64,7 @@ export const Pagination = ({
 				{children}
 				<li>
 					<a href={nextLink} className='nsw-icon-button'>
-						<span
-							className='material-icons nsw-material-icons'
-							aria-hidden='true'
-						>
-							keyboard_arrow_right
-						</span>
+						<Icon icon='ic:baseline-keyboard-arrow-right' />
 						<span className='sr-only'>Next</span>
 					</a>
 				</li>
