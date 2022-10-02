@@ -21,8 +21,8 @@ const options = {
  */
 const icons = {
 	info: 'ic:baseline-info',
-	warning: 'ic:baseline-cancel',
-	error: 'ic:baseline-error',
+	warning: 'ic:baseline-error',
+	error: 'ic:baseline-cancel',
 	success: 'ic:baseline-check-circle'
 }
 
@@ -79,7 +79,7 @@ export const Alert = ({
 			className='nsw-in-page-alert__icon'
 		/>
 		<div className='nsw-in-page-alert__content'>
-			<h4>{title}</h4>
+			<h5>{title}</h5>
 			{children}
 		</div>
 	</div>
