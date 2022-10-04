@@ -3180,9 +3180,11 @@ const Vo = ({
   hideLabel: f,
   children: /* @__PURE__ */ s(Mr, {
     ...d,
+    htmlId: c,
     options: i,
     selected: n,
-    placeholder: l
+    placeholder: l,
+    status: e
   })
 });
 Vo.propTypes = {
@@ -4067,8 +4069,8 @@ const hi = {
   success: "nsw-in-page-alert--success"
 }, vi = {
   info: "ic:baseline-info",
-  warning: "ic:baseline-cancel",
-  error: "ic:baseline-error",
+  warning: "ic:baseline-error",
+  error: "ic:baseline-cancel",
   success: "ic:baseline-check-circle"
 }, zi = ({
   title: e = "",
@@ -4085,7 +4087,7 @@ const hi = {
     className: "nsw-in-page-alert__icon"
   }), /* @__PURE__ */ b("div", {
     className: "nsw-in-page-alert__content",
-    children: [/* @__PURE__ */ s("h4", {
+    children: [/* @__PURE__ */ s("h5", {
       children: e
     }), r]
   })]
