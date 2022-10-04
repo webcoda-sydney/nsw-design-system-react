@@ -1,10 +1,10 @@
-import { ButtonHTMLAttributes, ComponentPropsWithoutRef, ElementType, ForwardedRef, forwardRef, ReactElement, ReactNode } from 'react'
+import { ButtonHTMLAttributes, ComponentPropsWithoutRef, ElementType, ForwardedRef, forwardRef, ReactNode } from 'react'
 
 export type ButtonProps = (ComponentPropsWithoutRef<'button'> | ComponentPropsWithoutRef<'a'>)  & {
 	/**
 	 * The component used for the link
 	 */
-	linkComponent?: ReactElement
+	linkComponent?: ReactNode
 
 	/**
 	 * If this is a link the location it goes
