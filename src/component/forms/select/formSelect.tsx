@@ -117,9 +117,11 @@ export const FormGroupSelect = ({
 	>
 		<Select
 			{...attrs}
+			htmlId={htmlId}
 			options={options}
 			selected={selected}
 			placeholder={placeholder}
+			status={status}
 		/>
 	</FormGroup>
 )
