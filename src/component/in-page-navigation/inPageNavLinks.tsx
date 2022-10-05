@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useId } from 'react'
 import PropTypes from 'prop-types'
 
 /**
@@ -52,7 +52,7 @@ export interface InPageNavLinksProps {
 export const InPageNavLinks = ({
 	title,
 	links,
-	ariaLabel = 'in page navigation',
+	ariaLabel = useId(),
 	className = '',
 	...attributeOptions
 }: InPageNavLinksProps) => (
