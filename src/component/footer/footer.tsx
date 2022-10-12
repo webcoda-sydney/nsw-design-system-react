@@ -81,33 +81,32 @@ export const FooterSectionGroup = ({
 	sectionLinks,
 	className = '',
 	...attributeOptions
-}: FooterSectionGroupProps) => (
-	<div className={`nsw-footer__group ${className}`} {...attributeOptions}>
-		<h3 className='nsw-footer__heading'>
-			<a href={heading.url}>{heading.text}</a>
-		</h3>
-		<ul className='nsw-footer__list'>
-			{sectionLinks.map(
-				(
-					{
-						url,
-						text,
-						target,
-						linkComponent: LinkComponent = 'a',
-						...attrs
-					},
-					index
-				) => (
-					<li key={url + text + index}>
-						<LinkComponent {...attrs} href={url} target={target}>
-							{text}
-						</LinkComponent>
-					</li>
-				)
-			)}
-		</ul>
-	</div>
-)
+}: FooterSectionGroupProps) => {
+		const HeadingLink = heading.linkComponent ? heading.linkComponent : 'a'
+		return (
+			<div className={`nsw-footer__group ${className}`} {...attributeOptions}>
+				<h3 className='nsw-footer__heading'>
+					<HeadingLink href={heading.url} target={heading.target}>{heading.text}</HeadingLink>
+				</h3>
+				<ul className='nsw-footer__list'>
+					{sectionLinks.map(
+						(
+							{
+								url, text, target, linkComponent: LinkComponent = 'a', ...attrs
+							},
+							index
+						) => (
+							<li key={url + text + index}>
+								<LinkComponent {...attrs} href={url} target={target}>
+									{text}
+								</LinkComponent>
+							</li>
+						)
+					)}
+				</ul>
+			</div>
+		)
+	}
 
 /**
  * A section for the footer that contains navigational elements
