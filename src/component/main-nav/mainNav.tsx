@@ -61,10 +61,20 @@ export const MainNav = (props: MainNavProps) => {
 	}
 
 	useEffect(() => {
+		let nav;
 		;(async () => {
 			const { Navigation } = await import('nsw-design-system/src/main')
-			new Navigation().init()
+			nav = new Navigation()
+			nav.init()
 		})()
+
+		return () => {
+			console.log("🚀 ~ file: mainNav.tsx ~ line 73 ~ return ~ nav", nav)
+			if(!!nav) {
+				nav.openSubNavElements = []
+				nav = null
+			}
+		}
 	}, [])
 
 	useEffect(() => {
@@ -84,6 +94,7 @@ export const MainNav = (props: MainNavProps) => {
 			}
 		}
 	}, [isCloseWhenOutsideClick, breakpoint])
+
 	return (
 		<nav
 			id='main-nav'
