@@ -79,7 +79,7 @@ export const Alert = ({
 			className='nsw-in-page-alert__icon'
 		/>
 		<div className='nsw-in-page-alert__content'>
-			{title && <h5>{title}</h5>}
+			{!!title && <h5>{title}</h5>}
 			{children}
 		</div>
 	</div>

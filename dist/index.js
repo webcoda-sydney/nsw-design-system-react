@@ -4094,7 +4094,7 @@ const hi = {
     className: "nsw-in-page-alert__icon"
   }), /* @__PURE__ */ b("div", {
     className: "nsw-in-page-alert__content",
-    children: [e && /* @__PURE__ */ s("h5", {
+    children: [!!e && /* @__PURE__ */ s("h5", {
       children: e
     }), r]
   })]
