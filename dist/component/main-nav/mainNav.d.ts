@@ -4,6 +4,7 @@ export interface NavItem {
     id?: string;
     url: string;
     text: string;
+    subNavHeader?: string;
     description?: string;
     target?: string;
     subNav?: NavItem[];

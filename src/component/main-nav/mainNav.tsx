@@ -8,6 +8,7 @@ export interface NavItem {
 	id?: string
 	url: string
 	text: string
+	subNavHeader?: string
 	description?: string
 	target?: string
 	subNav?: NavItem[]
@@ -146,7 +147,7 @@ export const MainNav = (props: MainNavProps) => {
 									<SubNav
 										subNav={navItem.subNav}
 										url={navItem.url}
-										text={navItem.text}
+										text={navItem.subNavHeader || navItem.text}
 										target={navItem.target}
 										description={navItem.description}
 										id={navItem.id}

@@ -3885,7 +3885,7 @@ const qi = ({
             }), (T = d.subNav) != null && T.length ? /* @__PURE__ */ s(Wr, {
               subNav: d.subNav,
               url: d.url,
-              text: d.text,
+              text: d.subNavHeader || d.text,
               target: d.target,
               description: d.description,
               id: d.id,
