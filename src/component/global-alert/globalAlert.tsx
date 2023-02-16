@@ -21,7 +21,7 @@ const buttonStyles = {
 
 export interface GlobalAlertProps {
 	title: string
-	content: string
+	content: ReactNode
 	ctaText?: string
 	ctaHref?: string
 	as?: 'critical' | 'light' | 'default'
@@ -58,7 +58,11 @@ export const GlobalAlert = (props: GlobalAlertProps) => {
 			<div className='nsw-global-alert__wrapper'>
 				<div className='nsw-global-alert__content'>
 					<div className='nsw-global-alert__title'>{title}</div>
-					<p>{content}</p>
+					{
+						typeof content === 'string'  ? (
+							<p>{content}</p>
+						) : content
+					}
 				</div>
 				<p>
 					{ctaText && ctaHref ? (
@@ -84,16 +88,6 @@ export const GlobalAlert = (props: GlobalAlertProps) => {
 			</div>
 		</div>
 	)
-}
-
-GlobalAlert.propTypes = {
-	title: PropTypes.string.isRequired,
-	content: PropTypes.string.isRequired,
-	children: PropTypes.node,
-	ctaText: PropTypes.string,
-	ctaHref: PropTypes.string,
-	className: PropTypes.string,
-	as: PropTypes.oneOf(['critical', 'light', 'default'])
 }
 
 export default GlobalAlert

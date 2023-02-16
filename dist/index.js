@@ -2541,7 +2541,7 @@ Io.propTypes = {
   className: u.exports.string,
   children: u.exports.node
 };
-const Ni = ({
+const Ri = ({
   label: e,
   items: n,
   className: r = "",
@@ -2582,7 +2582,7 @@ const Ni = ({
   children: n.map((o) => /* @__PURE__ */ s(jo, {
     ...o
   }, o.text))
-}), ki = ht(({
+}), Ni = ht(({
   linkComponent: e = "button",
   link: n,
   children: r,
@@ -2634,7 +2634,7 @@ Mo.propTypes = {
   children: u.exports.node.isRequired,
   className: u.exports.string
 };
-const Pi = ({
+const ki = ({
   link: e,
   linkTarget: n,
   style: r = "white",
@@ -2731,7 +2731,7 @@ const Pi = ({
     alt: r,
     ...o
   })
-}), Oi = ({
+}), Pi = ({
   src: e,
   children: n,
   className: r = "",
@@ -2875,7 +2875,7 @@ Ir.propTypes = {
   className: u.exports.string,
   children: u.exports.node
 };
-const $i = ({
+const Oi = ({
   footerLinks: e,
   className: n = "",
   ...r
@@ -2896,7 +2896,7 @@ const $i = ({
       children: o
     })
   }, t + o + f))
-}), Ii = ({
+}), $i = ({
   heading: e,
   sectionLinks: n,
   className: r = "",
@@ -2931,7 +2931,7 @@ const $i = ({
       }, i + c + p))
     })]
   });
-}, ji = ({
+}, Ii = ({
   children: e,
   className: n = "",
   ariaLabel: r = "footer",
@@ -2944,7 +2944,7 @@ const $i = ({
     className: "nsw-container",
     children: e
   })
-}), Ai = ({
+}), ji = ({
   children: e,
   className: n = "",
   ...r
@@ -2952,7 +2952,7 @@ const $i = ({
   className: `nsw-footer__lower ${n}`,
   ...r,
   children: e
-}), Mi = ({
+}), Ai = ({
   children: e,
   className: n = "",
   ...r
@@ -3088,7 +3088,7 @@ const Yo = ({
   type: i,
   ...l,
   id: o
-}), Fi = ({
+}), Mi = ({
   status: e = "default",
   className: n = "",
   inputType: r,
@@ -3407,7 +3407,7 @@ const Ko = {
   default: "nsw-button nsw-button--white",
   critical: "nsw-button nsw-button--white",
   light: "nsw-button nsw-button--dark"
-}, Xo = (e) => {
+}, Fi = (e) => {
   const {
     title: n,
     content: r,
@@ -3436,9 +3436,9 @@ const Ko = {
         children: [/* @__PURE__ */ s("div", {
           className: "nsw-global-alert__title",
           children: n
-        }), /* @__PURE__ */ s("p", {
+        }), typeof r == "string" ? /* @__PURE__ */ s("p", {
           children: r
-        })]
+        }) : r]
       }), /* @__PURE__ */ s("p", {
         children: t && o ? /* @__PURE__ */ s("a", {
           href: o,
@@ -3457,17 +3457,7 @@ const Ko = {
       })]
     })
   });
-};
-Xo.propTypes = {
-  title: u.exports.string.isRequired,
-  content: u.exports.string.isRequired,
-  children: u.exports.node,
-  ctaText: u.exports.string,
-  ctaHref: u.exports.string,
-  className: u.exports.string,
-  as: u.exports.oneOf(["critical", "light", "default"])
-};
-const Li = (e) => {
+}, Li = (e) => {
   const {
     siteTitle: n,
     siteDescriptor: r,
@@ -3625,15 +3615,15 @@ const Li = (e) => {
       })
     })
   });
-}, Zo = {
+}, Xo = {
   dark: "nsw-hero-banner--dark",
   light: "nsw-hero-banner--light",
   white: "nsw-hero-banner--white"
-}, ei = {
+}, Zo = {
   dark: "nsw-button nsw-button--white",
   light: "nsw-button nsw-button--dark",
   white: "nsw-button nsw-button--dark"
-}, ni = (e) => e ? typeof e != "number" && typeof e != "string" && typeof e != "boolean" && "src" in e ? /* @__PURE__ */ s("img", {
+}, ei = (e) => e ? typeof e != "number" && typeof e != "string" && typeof e != "boolean" && "src" in e ? /* @__PURE__ */ s("img", {
   className: "nsw-hero-banner__image",
   src: e.src,
   alt: e.alt
@@ -3651,7 +3641,7 @@ const Li = (e) => {
   className: f = "",
   ...d
 }) => /* @__PURE__ */ s("div", {
-  className: `nsw-hero-banner ${t ? Zo[t] : ""} ${o ? "nsw-hero-banner--wide" : ""} ${i ? " nsw-hero-banner--featured" : ""}  ${f}`,
+  className: `nsw-hero-banner ${t ? Xo[t] : ""} ${o ? "nsw-hero-banner--wide" : ""} ${i ? " nsw-hero-banner--featured" : ""}  ${f}`,
   ...d,
   children: /* @__PURE__ */ s("div", {
     className: "nsw-hero-banner__container",
@@ -3668,7 +3658,7 @@ const Li = (e) => {
           className: "nsw-hero-banner__button",
           children: /* @__PURE__ */ s("a", {
             href: r.url,
-            className: `nsw-button ${ei[t]}`,
+            className: `nsw-button ${Zo[t]}`,
             onClick: r.onClick,
             children: r.text
           })
@@ -3676,11 +3666,11 @@ const Li = (e) => {
       }), l, /* @__PURE__ */ s("div", {
         className: "nsw-hero-banner__box",
         role: "presentation",
-        children: ni(c)
+        children: ei(c)
       })]
     })
   })
-}), ri = ({
+}), ni = ({
   subtitle: e,
   children: n
 }) => /* @__PURE__ */ s("div", {
@@ -3693,7 +3683,7 @@ const Li = (e) => {
     }), n]
   })
 });
-ri.propTypes = {
+ni.propTypes = {
   subtitle: u.exports.string.isRequired,
   children: u.exports.node.isRequired
 };
@@ -3732,7 +3722,7 @@ const qi = ({
       key: i.title
     })) : ""
   })]
-}), ti = ({
+}), ri = ({
   text: e,
   link: n,
   linkComponent: r = "a",
@@ -3765,11 +3755,11 @@ const qi = ({
   children: /* @__PURE__ */ s("ul", {
     className: `nsw-link-list__list ${n}`,
     ...r,
-    children: e.map((t, o) => /* @__PURE__ */ s(ti, {
+    children: e.map((t, o) => /* @__PURE__ */ s(ri, {
       ...t
     }, t.href || "" + o))
   })
-}), oi = (e) => {
+}), ti = (e) => {
   const n = Object.keys(e).sort((r, t) => e[t] - e[r]);
   return n.map((r, t) => {
     let o = "";
@@ -3781,23 +3771,23 @@ const qi = ({
       query: o
     };
   });
-}, ii = oi, si = typeof window > "u" ? Te : mt, ai = si, ci = {
+}, oi = ti, ii = typeof window > "u" ? Te : mt, si = ii, ai = {
   breakpoint: void 0,
   minWidth: void 0,
   maxWidth: void 0
-}, li = (e, n, r = !0) => {
-  const t = gt(() => ii(e), [e]), [o, i] = cr(() => {
+}, ci = (e, n, r = !0) => {
+  const t = gt(() => oi(e), [e]), [o, i] = cr(() => {
     for (const { query: l, ...f } of t)
       if (typeof window < "u" && !(n && r)) {
         if (window.matchMedia(l).matches)
           return f;
       } else if (f.breakpoint === n)
         return f;
-    return ci;
+    return ai;
   }), c = yt(({ matches: l }, f) => {
     l && i(f);
   }, []);
-  return ai(() => {
+  return si(() => {
     const l = t.map(({ query: f, ...d }) => {
       const p = window.matchMedia(f);
       c(p, d);
@@ -3808,7 +3798,7 @@ const qi = ({
     });
     return () => l.forEach((f) => f());
   }, [t, c]), bt(o, (l) => typeof l.breakpoint == "string" ? `${l.breakpoint} (${l.minWidth} \u2264 x${l.maxWidth ? ` < ${l.maxWidth + 1}` : ""})` : ""), o;
-}, ui = li, fi = {
+}, li = ci, ui = {
   mobile: 0,
   tablet: 992
 }, Bi = (e) => {
@@ -3820,7 +3810,7 @@ const qi = ({
     ...i
   } = e, {
     breakpoint: c
-  } = ui(fi, "mobile"), l = ke(null), f = () => {
+  } = li(ui, "mobile"), l = ke(null), f = () => {
     var p;
     const d = (p = l.current) == null ? void 0 : p.querySelector("ul > li > a.active");
     return d && d.click(), d;
@@ -4033,7 +4023,7 @@ Wr.propTypes = {
   renderLink: u.exports.func,
   target: u.exports.string
 };
-const di = ({
+const fi = ({
   text: e = "A NSW Government website"
 }) => /* @__PURE__ */ s("div", {
   className: "nsw-masthead",
@@ -4044,10 +4034,10 @@ const di = ({
     })
   })
 });
-di.propTypes = {
+fi.propTypes = {
   text: u.exports.string
 };
-const pi = ({
+const di = ({
   nav: e,
   content: n
 }) => /* @__PURE__ */ b("nav", {
@@ -4065,16 +4055,16 @@ const pi = ({
     })
   })]
 });
-pi.propTypes = {
+di.propTypes = {
   nav: u.exports.string.isRequired,
   content: u.exports.string.isRequired
 };
-const hi = {
+const pi = {
   info: "nsw-in-page-alert--info",
   warning: "nsw-in-page-alert--warning",
   error: "nsw-in-page-alert--error",
   success: "nsw-in-page-alert--success"
-}, vi = {
+}, hi = {
   info: "ic:baseline-info",
   warning: "ic:baseline-error",
   error: "ic:baseline-cancel",
@@ -4087,10 +4077,10 @@ const hi = {
   compact: o = !1,
   ...i
 }) => /* @__PURE__ */ b("div", {
-  className: `nsw-in-page-alert ${t} ${hi[n]} ${o ? "nsw-in-page-alert--compact" : ""}`.trim(),
+  className: `nsw-in-page-alert ${t} ${pi[n]} ${o ? "nsw-in-page-alert--compact" : ""}`.trim(),
   ...i,
   children: [/* @__PURE__ */ s(J, {
-    icon: vi[n],
+    icon: hi[n],
     className: "nsw-in-page-alert__icon"
   }), /* @__PURE__ */ b("div", {
     className: "nsw-in-page-alert__content",
@@ -4098,7 +4088,7 @@ const hi = {
       children: e
     }), r]
   })]
-}), mi = ({
+}), vi = ({
   backLink: e,
   active: n,
   nextLink: r,
@@ -4143,7 +4133,7 @@ const hi = {
     })
   })
 });
-mi.propTypes = {
+vi.propTypes = {
   className: u.exports.string,
   paginationItems: u.exports.arrayOf(u.exports.shape({
     url: u.exports.string
@@ -4174,11 +4164,11 @@ Br.propTypes = {
   active: u.exports.number,
   url: u.exports.string
 };
-const gi = {
+const mi = {
   full: "",
   half: "nsw-section--half-padding",
   none: "nsw-section--no-padding"
-}, yi = ({
+}, gi = ({
   children: e,
   style: n = "white",
   container: r = !0,
@@ -4187,14 +4177,14 @@ const gi = {
   className: i = "",
   ...c
 }) => /* @__PURE__ */ s("div", {
-  className: `nsw-section ${i} ${gi[t]} nsw-section--${n} ${o ? "nsw-section--box" : ""}`,
+  className: `nsw-section ${i} ${mi[t]} nsw-section--${n} ${o ? "nsw-section--box" : ""}`,
   ...c,
   children: /* @__PURE__ */ s("div", {
     className: r ? "nsw-container" : "",
     children: e
   })
 });
-yi.propTypes = {
+gi.propTypes = {
   padding: u.exports.oneOf(["full", "half", "none"]),
   style: u.exports.oneOf(["white", "brand-dark", "brand-light", "brand-supplementary", "black", "off-white", "grey-01", "grey-02", "grey-03", "grey-04"]),
   children: u.exports.node.isRequired,
@@ -4202,7 +4192,7 @@ yi.propTypes = {
   className: u.exports.string,
   box: u.exports.bool
 };
-const bi = ({
+const yi = ({
   caption: e,
   headers: n,
   data: r,
@@ -4235,7 +4225,7 @@ const bi = ({
     }, `tableRow-${ce()}`))
   })]
 });
-bi.propTypes = {
+yi.propTypes = {
   caption: u.exports.string,
   headers: u.exports.arrayOf(Object).isRequired,
   data: u.exports.arrayOf(Object).isRequired,
@@ -4327,17 +4317,17 @@ Ur.propTypes = {
   captionId: u.exports.string,
   className: u.exports.string
 };
-const wi = ({
+const bi = ({
   children: e
 }) => /* @__PURE__ */ s("div", {
   className: "nsw-table-responsive",
   role: "region",
   children: e
 });
-wi.propTypes = {
+bi.propTypes = {
   children: u.exports.node
 };
-const _i = (e) => {
+const wi = (e) => {
   const {
     className: n = "",
     children: r,
@@ -4357,20 +4347,20 @@ const _i = (e) => {
     children: r
   });
 };
-_i.propTypes = {
+wi.propTypes = {
   className: u.exports.string,
   children: u.exports.node
 };
-const xi = ({
+const _i = ({
   children: e
 }) => /* @__PURE__ */ s("ul", {
   className: "nsw-tabs__list",
   children: e
 });
-xi.propTypes = {
+_i.propTypes = {
   children: u.exports.node.isRequired
 };
-const Ti = ({
+const xi = ({
   urlHash: e,
   title: n
 }) => /* @__PURE__ */ s("li", {
@@ -4381,11 +4371,11 @@ const Ti = ({
     children: n
   })
 });
-Ti.propTypes = {
+xi.propTypes = {
   urlHash: u.exports.string.isRequired,
   title: u.exports.string.isRequired
 };
-const Ei = ({
+const Ti = ({
   urlHash: e,
   children: n
 }) => /* @__PURE__ */ s("section", {
@@ -4393,7 +4383,7 @@ const Ei = ({
   className: "nsw-tabs__content",
   children: n
 });
-Ei.propTypes = {
+Ti.propTypes = {
   urlHash: u.exports.string.isRequired,
   children: u.exports.node.isRequired
 };
@@ -4434,12 +4424,12 @@ const Yi = ({
     link: t.link,
     text: t.text
   }, t.text))
-}), Si = {
+}), Ei = {
   default: "",
   dark: "nsw-media--dark",
   light: "nsw-media--light",
   transparent: "nsw-media--transparent"
-}, Ci = ({
+}, Si = ({
   image: e,
   video: n,
   title: r,
@@ -4451,7 +4441,7 @@ const Yi = ({
   style: f = "default"
 }) => /* @__PURE__ */ b("figure", {
   className: `nsw-media ${o === void 0 || o === "none" ? "" : ` nsw-media--left-${o}`}
-		${Si[f]}
+		${Ei[f]}
 		${i === void 0 || i === "none" ? "" : ` nsw-media--right-${i}`}
 		${c === void 0 || c === "none" ? "" : ` nsw-media--${c}`}`,
   children: [n ? /* @__PURE__ */ s("div", {
@@ -4469,7 +4459,7 @@ const Yi = ({
     children: t
   })]
 });
-Ci.propTypes = {
+Si.propTypes = {
   style: u.exports.oneOf(["default", "dark", "light", "transparent"]),
   video: u.exports.string,
   image: u.exports.string,
@@ -4483,45 +4473,45 @@ export {
   $o as Accordion,
   Io as AccordionGroup,
   zi as Alert,
-  Ni as Breadcrumbs,
-  ki as Button,
+  Ri as Breadcrumbs,
+  Ni as Button,
   Mo as Callout,
-  Pi as Card,
-  Oi as CardCopy,
+  ki as Card,
+  Pi as CardCopy,
   Wo as ContentBlock,
-  Mi as Footer,
-  $i as FooterLinks,
-  Ai as FooterLower,
-  Ii as FooterSectionGroup,
-  ji as FooterUpper,
+  Ai as Footer,
+  Oi as FooterLinks,
+  ji as FooterLower,
+  $i as FooterSectionGroup,
+  Ii as FooterUpper,
   Ar as FormGroup,
   Go as FormGroupCheckbox,
   Qo as FormGroupRadio,
   Vo as FormGroupSelect,
-  Fi as FormGroupText,
+  Mi as FormGroupText,
   de as FormHelper,
   Yo as FormLabel,
-  Xo as GlobalAlert,
+  Fi as GlobalAlert,
   Li as Header,
   Di as HeroBanner,
-  ri as HeroBannerList,
+  ni as HeroBannerList,
   qi as InPageNavLinks,
   Wi as LinkList,
   Bi as MainNav,
-  di as Masthead,
-  Ci as Media,
-  mi as Pagination,
+  fi as Masthead,
+  Si as Media,
+  vi as Pagination,
   Jo as ProgressIndicator,
-  yi as Section,
+  gi as Section,
   Fr as Select,
   Mr as SelectItem,
-  pi as SkipTo,
-  Ti as TabItem,
-  xi as TabItemWrapper,
-  Ei as TabSection,
-  bi as Table,
-  wi as TableResponsiveWrapper,
-  _i as Tabs,
+  di as SkipTo,
+  xi as TabItem,
+  _i as TabItemWrapper,
+  Ti as TabSection,
+  yi as Table,
+  bi as TableResponsiveWrapper,
+  wi as Tabs,
   Yi as TagList,
   Ho as TextInput
 };
