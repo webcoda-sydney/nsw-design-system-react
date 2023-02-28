@@ -1,5 +1,4 @@
 import { useRef, useEffect, ReactNode } from 'react'
-import PropTypes from 'prop-types'
 import Icon from '../Icon'
 
 /**
@@ -27,6 +26,7 @@ export interface GlobalAlertProps {
 	as?: 'critical' | 'light' | 'default'
 	className?: string
 	children?: ReactNode
+	onClose?: (_e: React.MouseEvent<HTMLButtonElement>) => void
 }
 export const GlobalAlert = (props: GlobalAlertProps) => {
 
@@ -38,6 +38,7 @@ export const GlobalAlert = (props: GlobalAlertProps) => {
 		as = 'default',
 		className = '',
 		children,
+		onClose,
 		...attributeOptions
 	} = props
 	const ref = useRef(null)
@@ -81,6 +82,7 @@ export const GlobalAlert = (props: GlobalAlertProps) => {
 				<button
 					type='button'
 					className='nsw-icon-button js-close-alert'
+					onClick={onClose}
 				>
 					<Icon icon="ic:baseline-close" />
 					<span className='sr-only'>Close message</span>
