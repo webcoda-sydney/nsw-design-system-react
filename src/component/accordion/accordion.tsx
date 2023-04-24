@@ -1,5 +1,4 @@
-import { Fragment, ReactNode, useState } from 'react'
-import PropTypes from 'prop-types'
+import { Fragment, ReactNode, useState, useEffect } from 'react'
 import useIdExtended from '@/hooks/useIdExtended'
 import Icon from '../Icon'
 export interface AccordionProps {
@@ -10,9 +9,13 @@ export interface AccordionProps {
 }
 
 export const Accordion = (props: AccordionProps) => {
-    const [isOpen, setIsOpen] = useState(false)
+    const { header, body, closed = true, className = '', ...attributeOptions } = props
+    const [isOpen, setIsOpen] = useState(!closed)
     const uID = useIdExtended('accordion')
-    const { header, body, closed, className = '', ...attributeOptions } = props
+
+	useEffect(() => {
+		setIsOpen(!closed)
+	}, [closed])
 
     return (
 		<Fragment>
@@ -40,12 +43,6 @@ export const Accordion = (props: AccordionProps) => {
 	)
 }
 
-Accordion.propTypes = {
-    header: PropTypes.string.isRequired,
-    body: PropTypes.node.isRequired,
-    className: PropTypes.string
-}
-
 export interface AccordionGroupProps {
     className?: string
     children: ReactNode
@@ -63,8 +60,3 @@ export const AccordionGroup = ({
         {children}
     </div>
 )
-
-AccordionGroup.propTypes = {
-    className: PropTypes.string,
-    children: PropTypes.node
-}
