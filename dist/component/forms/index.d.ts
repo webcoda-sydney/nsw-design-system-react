@@ -12,6 +12,6 @@ import { ProgressIndicator } from './progress-indicator/progressIndicator';
 export interface FormOption {
     text: string;
     value: string | number;
-    selected?: string;
+    selected?: boolean;
 }
 export { TextInput, FormGroup, FormGroupText, FormGroupSelect, Select, SelectItem, FormGroupCheckbox, FormGroupRadio, ProgressIndicator, };

@@ -21,6 +21,8 @@ export interface RadioItemProps
 	value: FormOption['value']
 
 	uniqueID?: string
+	onChange?: FormGroupCheckboxProps['onChange']
+	checked?: boolean
 }
 export const RadioItem = ({
 	text,
@@ -28,35 +30,32 @@ export const RadioItem = ({
 	value,
 	status,
 	uniqueID = nextId(),
+	onChange,
+	checked = false,
 	...attributeOptions
-}: RadioItemProps) => (
-	<React.Fragment>
-		<input
-			className='nsw-form__radio-input'
-			type='radio'
-			name={htmlId}
-			aria-describedby={
-				status === 'invalid'
-					? `helper${htmlId} error${htmlId}`
-					: `helper${htmlId}`
-			}
-			id={uniqueID}
-			{...attributeOptions}
-		/>
-		<label className='nsw-form__radio-label' htmlFor={uniqueID}>
-			{text}
-		</label>
-	</React.Fragment>
-)
-
-RadioItem.propTypes = {
-	text: PropTypes.string.isRequired,
-	value: PropTypes.string.isRequired,
-	className: PropTypes.string,
-	htmlId: PropTypes.string,
-	status: PropTypes.oneOf(['valid', 'invalid', 'default']),
-	as: PropTypes.string,
-	uniqueID: PropTypes.func
+}: RadioItemProps) => {
+	return (
+		<React.Fragment>
+			<input
+				className='nsw-form__radio-input'
+				type='radio'
+				name={htmlId}
+				aria-describedby={
+					status === 'invalid'
+						? `helper${htmlId} error${htmlId}`
+						: `helper${htmlId}`
+				}
+				id={uniqueID}
+				value={value}
+				checked={checked}
+				onChange={onChange}
+				{...attributeOptions}
+			/>
+			<label className='nsw-form__radio-label' htmlFor={uniqueID}>
+				{text}
+			</label>
+		</React.Fragment>
+	)
 }
 
 /**
@@ -81,66 +80,55 @@ export const FormGroupRadio = ({
 	status = 'default',
 	htmlId,
 	statusText,
-	options
-}: FormGroupRadioProps) => (
-	<div className={`nsw-form__group ${className}`}>
-		<fieldset
-			className='nsw-form__fieldset'
-			aria-invalid={status === 'invalid' ? 'true' : undefined}
-		>
-			{as === 'group' ? (
-				<legend>
-					<span className='nsw-form__legend'>{label}</span>
-					{helper ? (
-						<FormHelper htmlId={htmlId}>{helper}</FormHelper>
-					) : (
-						''
-					)}
-					{status ? (
-						<FormHelper htmlId={htmlId} status={status}>
-							{statusText}
-						</FormHelper>
-					) : (
-						''
-					)}
-				</legend>
-			) : (
-				''
-			)}
+	options,
+	onChange
+}: FormGroupRadioProps) => {
+	return (
+		<div className={`nsw-form__group ${className}`}>
+			<fieldset
+				className='nsw-form__fieldset'
+				aria-invalid={status === 'invalid' ? 'true' : undefined}
+			>
+				{as === 'group' ? (
+					<legend>
+						<span className='nsw-form__legend'>{label}</span>
+						{helper ? (
+							<FormHelper htmlId={htmlId}>{helper}</FormHelper>
+						) : (
+							''
+						)}
+						{status ? (
+							<FormHelper htmlId={htmlId} status={status}>
+								{statusText}
+							</FormHelper>
+						) : (
+							''
+						)}
+					</legend>
+				) : (
+					''
+				)}
 
-			<div>
-				{options.map((option) => (
-					<RadioItem
-						key={option.value}
-						{...option}
-						htmlId={htmlId}
-						status={status}
-					/>
-				))}
-			</div>
-			{status && as !== 'group' ? (
-				<FormHelper htmlId={htmlId} status={status}>
-					{statusText}
-				</FormHelper>
-			) : (
-				''
-			)}
-		</fieldset>
-	</div>
-)
-
-FormGroupRadio.propTypes = {
-	status: PropTypes.oneOf(['valid', 'invalid', 'default']),
-	statusText: PropTypes.string,
-	htmlId: PropTypes.string,
-	label: PropTypes.string,
-	as: PropTypes.oneOf(['group', false]),
-	helper: PropTypes.string,
-	options: PropTypes.arrayOf(
-		PropTypes.shape({
-			value: PropTypes.string,
-			text: PropTypes.string
-		})
-	).isRequired,
-	className: PropTypes.string
+				<div>
+					{options.map((option) => (
+						<RadioItem
+							key={option.value}
+							{...option}
+							htmlId={htmlId}
+							status={status}
+							checked={option.selected}
+							onChange={onChange}
+						/>
+					))}
+				</div>
+				{status && as !== 'group' ? (
+					<FormHelper htmlId={htmlId} status={status}>
+						{statusText}
+					</FormHelper>
+				) : (
+					''
+				)}
+			</fieldset>
+		</div>
+	)
 }

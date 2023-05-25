@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { Fragment } from 'react'
+import { ChangeEvent, Fragment } from 'react'
 import nextId from 'react-id-generator'
 import type { FormOption } from '..'
 import { FormGroupProps, FormHelper, FormHelperProps } from '../group-elements'
@@ -18,6 +18,8 @@ export interface CheckboxItemProps {
 	status?: FormHelperProps['status']
 	as?: 'group' | false
 	uniqueID?: string
+	onChange?: FormGroupCheckboxProps['onChange']
+	checked?: boolean
 }
 export const CheckboxItem = ({
 	text,
@@ -26,6 +28,8 @@ export const CheckboxItem = ({
 	status,
 	as,
 	uniqueID = nextId(),
+	onChange,
+	checked = false,
 	...attributeOptions
 }: CheckboxItemProps) => (
 	<Fragment>
@@ -42,6 +46,9 @@ export const CheckboxItem = ({
 					: `helper${htmlId}`
 			}
 			id={uniqueID}
+			value={value}
+			checked={checked}
+			onChange={onChange}
 			{...attributeOptions}
 		/>
 		<label className='nsw-form__checkbox-label' htmlFor={uniqueID}>
@@ -83,7 +90,7 @@ export interface FormGroupCheckboxProps extends FormGroupProps {
 	/**
 	 * Text for label
 	 */
-	label?: string
+	label: string
 
 	/**
 	 * Text for helper
@@ -101,6 +108,8 @@ export interface FormGroupCheckboxProps extends FormGroupProps {
 	className?: string
 
 	as?: 'group' | false
+
+	onChange?: (e: ChangeEvent<HTMLInputElement>) => any
 }
 export const FormGroupCheckbox = ({
 	className = '',
@@ -110,7 +119,8 @@ export const FormGroupCheckbox = ({
 	options,
 	htmlId = nextId(),
 	statusText,
-	helper
+	helper,
+	onChange,
 }: FormGroupCheckboxProps) => (
 	<div className={`nsw-form__group ${className}`}>
 		<fieldset
@@ -145,6 +155,8 @@ export const FormGroupCheckbox = ({
 						as={as}
 						htmlId={htmlId}
 						status={status}
+						checked={option.selected}
+						onChange={onChange}
 					/>
 				))}
 			</div>

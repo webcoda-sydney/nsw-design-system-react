@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { ChangeEvent } from 'react';
 import type { FormOption } from '..';
 import { FormGroupProps, FormHelperProps } from '../group-elements';
 /**
@@ -15,9 +16,11 @@ export interface CheckboxItemProps {
     status?: FormHelperProps['status'];
     as?: 'group' | false;
     uniqueID?: string;
+    onChange?: FormGroupCheckboxProps['onChange'];
+    checked?: boolean;
 }
 export declare const CheckboxItem: {
-    ({ text, htmlId, value, status, as, uniqueID, ...attributeOptions }: CheckboxItemProps): JSX.Element;
+    ({ text, htmlId, value, status, as, uniqueID, onChange, checked, ...attributeOptions }: CheckboxItemProps): JSX.Element;
     propTypes: {
         text: PropTypes.Validator<string>;
         value: PropTypes.Validator<string>;
@@ -47,7 +50,7 @@ export interface FormGroupCheckboxProps extends FormGroupProps {
     /**
      * Text for label
      */
-    label?: string;
+    label: string;
     /**
      * Text for helper
      */
@@ -61,9 +64,10 @@ export interface FormGroupCheckboxProps extends FormGroupProps {
      */
     className?: string;
     as?: 'group' | false;
+    onChange?: (e: ChangeEvent<HTMLInputElement>) => any;
 }
 export declare const FormGroupCheckbox: {
-    ({ className, as, status, label, options, htmlId, statusText, helper }: FormGroupCheckboxProps): JSX.Element;
+    ({ className, as, status, label, options, htmlId, statusText, helper, onChange, }: FormGroupCheckboxProps): JSX.Element;
     propTypes: {
         status: PropTypes.Requireable<string>;
         statusText: PropTypes.Requireable<string>;

@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { FormHelperProps } from '../group-elements';
 import type { FormGroupCheckboxProps } from '../checkbox/formCheckbox';
 import type { FormOption } from '..';
@@ -15,19 +14,10 @@ export interface RadioItemProps extends Pick<FormHelperProps, 'htmlId' | 'status
      */
     value: FormOption['value'];
     uniqueID?: string;
+    onChange?: FormGroupCheckboxProps['onChange'];
+    checked?: boolean;
 }
-export declare const RadioItem: {
-    ({ text, htmlId, value, status, uniqueID, ...attributeOptions }: RadioItemProps): JSX.Element;
-    propTypes: {
-        text: PropTypes.Validator<string>;
-        value: PropTypes.Validator<string>;
-        className: PropTypes.Requireable<string>;
-        htmlId: PropTypes.Requireable<string>;
-        status: PropTypes.Requireable<string>;
-        as: PropTypes.Requireable<string>;
-        uniqueID: PropTypes.Requireable<(...args: any[]) => any>;
-    };
-};
+export declare const RadioItem: ({ text, htmlId, value, status, uniqueID, onChange, checked, ...attributeOptions }: RadioItemProps) => JSX.Element;
 /**
  * The Form group radio component
  *
@@ -41,19 +31,4 @@ export declare const RadioItem: {
  */
 export interface FormGroupRadioProps extends FormGroupCheckboxProps {
 }
-export declare const FormGroupRadio: {
-    ({ className, as, label, helper, status, htmlId, statusText, options }: FormGroupRadioProps): JSX.Element;
-    propTypes: {
-        status: PropTypes.Requireable<string>;
-        statusText: PropTypes.Requireable<string>;
-        htmlId: PropTypes.Requireable<string>;
-        label: PropTypes.Requireable<string>;
-        as: PropTypes.Requireable<string | boolean>;
-        helper: PropTypes.Requireable<string>;
-        options: PropTypes.Validator<(PropTypes.InferProps<{
-            value: PropTypes.Requireable<string>;
-            text: PropTypes.Requireable<string>;
-        }> | null | undefined)[]>;
-        className: PropTypes.Requireable<string>;
-    };
-};
+export declare const FormGroupRadio: ({ className, as, label, helper, status, htmlId, statusText, options, onChange }: FormGroupRadioProps) => JSX.Element;
