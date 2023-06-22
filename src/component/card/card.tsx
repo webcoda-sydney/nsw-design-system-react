@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types'
+import clsx from 'clsx'
 import type { ElementType, ReactNode } from 'react'
 import Icon from '../Icon'
 
@@ -104,9 +104,10 @@ const Card = ({
 	return (
 		<CardContainer
 			className={
-				`nsw-card nsw-card--${style} ${className}` +
-				`${headline && !children ? 'nsw-card--headline' : ''} ` +
-				`${highlight ? 'nsw-card--highlight' : ''} `
+				clsx(className, `nsw-card nsw-card--${style}`, {
+					'nsw-card--highlight': highlight,
+					'nsw-card--headline': headline && !children
+				})
 			}
 			{...otherAttrs}
 		>
