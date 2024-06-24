@@ -3482,8 +3482,6 @@ const zo = {
                 href: o,
                 className: "nsw-header__logo-link",
                 children: [u || /* @__PURE__ */ b("svg", {
-                  width: "259",
-                  height: "280",
                   viewBox: "0 0 259 280",
                   fill: "none",
                   xmlns: "http://www.w3.org/2000/svg",
