@@ -1,4 +1,7 @@
 import React, { ElementType } from 'react';
+/**
+ * Displays across the top of all NSW Government sites
+ */
 export interface HeaderProps {
     /**
      * Main site title
@@ -37,5 +40,5 @@ export interface HeaderProps {
      */
     slotMainLogo?: React.ReactNode;
 }
-export declare const Header: (props: HeaderProps) => React.ReactElement<any, string | React.JSXElementConstructor<any>>;
+export declare const Header: (props: HeaderProps) => JSX.Element;
 export default Header;
