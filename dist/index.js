@@ -1845,7 +1845,7 @@ const Ti = (e) => {
         type: "button",
         "aria-expanded": a,
         "aria-controls": f,
-        className: `nsw-accordion__button ${a ? "is-open" : ""}`,
+        className: `nsw-accordion__button ${a ? "active" : ""}`,
         onClick: () => l((u) => !u),
         children: [n, /* @__PURE__ */ s(Q, {
           icon: "ic:baseline-keyboard-arrow-down",
