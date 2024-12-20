@@ -25,7 +25,7 @@ export const Accordion = (props: AccordionProps) => {
 					aria-expanded={isOpen}
 					aria-controls={uID}
 					className={`nsw-accordion__button ${
-						isOpen ? 'is-open' : ''
+						isOpen ? 'active' : ''
 					}`}
 					onClick={() => setIsOpen((prevState) => !prevState)}
 				>
