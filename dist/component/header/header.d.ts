@@ -39,6 +39,8 @@ export interface HeaderProps {
      * Main logo slot
      */
     slotMainLogo?: React.ReactNode;
+    slotSearch?: React.ReactNode;
+    slotSearchInput?: React.ReactNode;
 }
 export declare const Header: (props: HeaderProps) => JSX.Element;
 export default Header;

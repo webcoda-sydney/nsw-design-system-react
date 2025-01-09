@@ -42,6 +42,9 @@ export interface HeaderProps {
 	 * Main logo slot
 	 */
 	slotMainLogo?: React.ReactNode
+
+	slotSearch?: React.ReactNode
+	slotSearchInput?: React.ReactNode
 }
 export const Header = (props: HeaderProps) => {
 	const {
@@ -54,6 +57,8 @@ export const Header = (props: HeaderProps) => {
 		search = true,
 		onSubmit,
 		slotMainLogo,
+		slotSearch,
+		slotSearchInput,
 		...attributeOptions
 	} = props
 
@@ -217,6 +222,9 @@ export const Header = (props: HeaderProps) => {
 							''
 						)}
 					</div>
+					{
+						slotSearch
+					}
 					{search ? (
 						<div
 							id='header-search'
@@ -230,13 +238,17 @@ export const Header = (props: HeaderProps) => {
 								>
 									Search site for:
 								</label>
-								<input
-									autoComplete='off'
-									className='nsw-header__input js-search-input'
-									id='nsw-header-input'
-									name='searchInput'
-									type='text'
-								/>
+								{
+									!!slotSearchInput ? slotSearchInput : (
+										<input
+											autoComplete='off'
+											className='nsw-header__input js-search-input'
+											id='nsw-header-input'
+											name='searchInput'
+											type='text'
+										/>
+									)
+								}
 								<button
 									className='nsw-icon-button nsw-icon-button--flex'
 									type='submit'
