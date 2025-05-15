@@ -62,7 +62,7 @@ export const MainNav = (props: MainNavProps) => {
 	}
 
 	useEffect(() => {
-		let nav;
+		let nav
 		;(async () => {
 			const { Navigation } = await import('nsw-design-system/src/main')
 			nav = new Navigation()
@@ -70,8 +70,7 @@ export const MainNav = (props: MainNavProps) => {
 		})()
 
 		return () => {
-			console.log("🚀 ~ file: mainNav.tsx ~ line 73 ~ return ~ nav", nav)
-			if(!!nav) {
+			if (!!nav) {
 				nav.openSubNavElements = []
 				nav = null
 			}
@@ -112,7 +111,7 @@ export const MainNav = (props: MainNavProps) => {
 					className='nsw-icon-button js-close-nav'
 					aria-expanded='true'
 				>
-					<Icon icon="ic:baseline-close" />
+					<Icon icon='ic:baseline-close' />
 					<span className='sr-only'>Close Menu</span>
 				</button>
 			</div>
@@ -137,8 +136,7 @@ export const MainNav = (props: MainNavProps) => {
 										<Icon
 											icon='ic:baseline-keyboard-arrow-right'
 											className='nsw-main-nav__link-icon'
-										>
-										</Icon>
+										></Icon>
 									) : (
 										''
 									)}
@@ -147,7 +145,9 @@ export const MainNav = (props: MainNavProps) => {
 									<SubNav
 										subNav={navItem.subNav}
 										url={navItem.url}
-										text={navItem.subNavHeader || navItem.text}
+										text={
+											navItem.subNavHeader || navItem.text
+										}
 										target={navItem.target}
 										description={navItem.description}
 										id={navItem.id}
@@ -229,7 +229,7 @@ export const SubNav = ({
 	text,
 	description,
 	target,
-	linkComponent = 'a',
+	linkComponent = 'a'
 }: SubNavProps) => {
 	const _id = id || useIdExtended()
 	if (!subNav) return null
@@ -279,7 +279,9 @@ export const SubNav = ({
 									>
 										<SubNavHeader
 											url={url}
-											text={text}
+											text={
+												subNavItem.subNavHeader || text
+											}
 											description={description}
 											id={subNavId}
 											linkComponent={LinkComponent}
@@ -287,7 +289,9 @@ export const SubNav = ({
 										<ul className='nsw-main-nav__sub-list'>
 											{subNavItem.subNav.map(
 												(subSubNavItem, index) => {
-													const SubLinkComponent = subSubNavItem.linkComponent || 'a'
+													const SubLinkComponent =
+														subSubNavItem.linkComponent ||
+														'a'
 													return (
 														<li
 															key={

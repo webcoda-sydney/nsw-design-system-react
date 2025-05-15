@@ -32,7 +32,7 @@ export declare const MainNav: (props: MainNavProps) => JSX.Element;
 export declare const SubNavHeader: ({ url, text, description, id, target, linkComponent: LinkComponent }: Omit<NavItem, 'subNav'>) => JSX.Element;
 export declare type SubNavProps = NavItem;
 export declare const SubNav: {
-    ({ id, subNav, url, text, description, target, linkComponent, }: SubNavProps): JSX.Element | null;
+    ({ id, subNav, url, text, description, target, linkComponent }: SubNavProps): JSX.Element | null;
     propTypes: {
         subNav: PropTypes.Validator<(PropTypes.InferProps<PropTypes.ValidationMap<any>> | null | undefined)[]>;
         url: PropTypes.Requireable<string>;
