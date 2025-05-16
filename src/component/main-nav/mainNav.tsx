@@ -278,7 +278,7 @@ export const SubNav = ({
 										aria-label={`${text} Submenu`}
 									>
 										<SubNavHeader
-											url={url}
+											url={subNavItem.url || url}
 											text={
 												subNavItem.subNavHeader || text
 											}

@@ -4026,7 +4026,7 @@ const Yi = ({
               role: "region",
               "aria-label": `${t} Submenu`,
               children: [/* @__PURE__ */ s(ar, {
-                url: r,
+                url: f.url || r,
                 text: f.subNavHeader || t,
                 description: o,
                 id: p,
