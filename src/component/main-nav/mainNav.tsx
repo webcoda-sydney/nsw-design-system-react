@@ -64,14 +64,26 @@ export const MainNav = (props: MainNavProps) => {
 	useEffect(() => {
 		let nav
 		;(async () => {
-			const { Navigation } = await import('nsw-design-system/src/main')
-			nav = new Navigation()
-			nav.init()
+			try {
+				const { Navigation } = await import('nsw-design-system/src/main')
+				nav = new Navigation()
+				try {
+					nav.init()
+				} catch (error) {
+					console.warn('nsw-ds-react: Error initializing navigation:', error)
+				}
+			} catch (error) {
+				console.warn('nsw-ds-react: Error loading navigation functionality:', error)
+			}
 		})()
 
 		return () => {
 			if (!!nav) {
-				nav.openSubNavElements = []
+				try {
+					nav.openSubNavElements = []
+				} catch (error) {
+					console.warn('nsw-ds-react: Error cleaning up navigation:', error)
+				}
 				nav = null
 			}
 		}

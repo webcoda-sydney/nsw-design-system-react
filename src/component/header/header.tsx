@@ -67,13 +67,31 @@ export const Header = (props: HeaderProps) => {
 
 	useEffect(() => {
 		;(async () => {
-			const { SiteSearch } = await import('nsw-design-system/src/main')
-			if (search) {
-				new SiteSearch(refOpenSearchButton.current).init()
-				new SiteSearch(refCloseSearchButton.current).init()
+			try {
+				const { SiteSearch } = await import('nsw-design-system/src/main')
+				if (search) {
+					// Add null checks before initializing
+					if (refOpenSearchButton.current) {
+						try {
+							new SiteSearch(refOpenSearchButton.current).init()
+						} catch (error) {
+							console.warn('nsw-ds-react: Error initializing open search component:', error)
+						}
+					}
+
+					if (refCloseSearchButton.current) {
+						try {
+							new SiteSearch(refCloseSearchButton.current).init()
+						} catch (error) {
+							console.warn('nsw-ds-react: Error initializing close search component:', error)
+						}
+					}
+				}
+			} catch (error) {
+				console.warn('nsw-ds-react: Error loading search functionality:', error)
 			}
 		})()
-	}, [])
+	}, [search])
 
 	return (
 		<Fragment>
