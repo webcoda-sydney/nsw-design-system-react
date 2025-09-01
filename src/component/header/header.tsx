@@ -227,7 +227,7 @@ export const Header = (props: HeaderProps) => {
 								<button
 									ref={refOpenSearchButton}
 									type='button'
-									className='js-open-search'
+									className='js-open-search_dev'
 									aria-expanded='false'
 									aria-controls='header-search'
 								>
