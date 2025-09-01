@@ -1,15 +1,56 @@
 class u {
   constructor(t) {
-    this.triggerButton = t, this.originalButton = document.querySelector(".js-open-search"), this.targetElement = document.getElementById(this.triggerButton.getAttribute("aria-controls")), this.searchInput = this.targetElement.querySelector(".js-search-input"), this.pressed = this.triggerButton.getAttribute("aria-expanded") === "true";
+    this.triggerButton = t;
+    // Add null checks to prevent errors
+    if (!this.triggerButton) {
+      console.warn('nsw-ds-react: triggerButton is null, skipping initialization');
+      return;
+    }
+
+    this.originalButton = document.querySelector(".js-open-search");
+    const ariaControls = this.triggerButton.getAttribute("aria-controls");
+    this.targetElement = ariaControls ? document.getElementById(ariaControls) : null;
+
+    if (this.targetElement) {
+      this.searchInput = this.targetElement.querySelector(".js-search-input");
+    } else {
+      this.searchInput = null;
+    }
+
+    this.pressed = this.triggerButton.getAttribute("aria-expanded") === "true";
   }
   init() {
-    this.controls();
+    // Only initialize if triggerButton exists
+    if (this.triggerButton) {
+      this.controls();
+    }
   }
   controls() {
-    this.triggerButton.addEventListener("click", this.showHide.bind(this), !1);
+    if (this.triggerButton) {
+      this.triggerButton.addEventListener("click", this.showHide.bind(this), !1);
+    }
   }
   showHide() {
-    this.pressed ? (this.targetElement.hidden = !0, this.originalButton.hidden = !1, this.originalButton.focus()) : (this.targetElement.hidden = !1, this.originalButton.hidden = !0, this.searchInput.focus());
+    // Add null checks to prevent errors
+    if (!this.triggerButton || !this.targetElement) {
+      return;
+    }
+
+    if (this.pressed) {
+      this.targetElement.hidden = !0;
+      if (this.originalButton) {
+        this.originalButton.hidden = !1;
+        this.originalButton.focus();
+      }
+    } else {
+      this.targetElement.hidden = !1;
+      if (this.originalButton) {
+        this.originalButton.hidden = !0;
+      }
+      if (this.searchInput) {
+        this.searchInput.focus();
+      }
+    }
   }
 }
 const r = u, b = (n) => ({
@@ -339,22 +380,80 @@ Element.prototype.closest || (Element.prototype.matches || (Element.prototype.ma
   return null;
 });
 function N() {
-  const n = document.querySelectorAll(".js-open-search"), t = document.querySelectorAll(".js-close-search"), e = document.querySelectorAll(".js-accordion"), s = document.querySelectorAll(".js-dialog"), i = document.querySelectorAll(".js-filters"), a = document.querySelectorAll(".js-tabs"), l = document.querySelectorAll(".js-global-alert");
-  n.forEach((o) => {
-    new r(o).init();
-  }), t.forEach((o) => {
-    new r(o).init();
-  }), new m().init(), e.forEach((o) => {
-    new g(o).init();
-  }), s.forEach((o) => {
-    new k(o).init();
-  }), i && i.forEach((o) => {
-    new y(o).init();
-  }), a && a.forEach((o) => {
-    new A(o).init();
-  }), l && l.forEach((o) => {
-    new w(o).init();
-  });
+  // Add null checks and error handling to prevent crashes
+  try {
+    const n = document.querySelectorAll(".js-open-search"),
+          t = document.querySelectorAll(".js-close-search"),
+          e = document.querySelectorAll(".js-accordion"),
+          s = document.querySelectorAll(".js-dialog"),
+          i = document.querySelectorAll(".js-filters"),
+          a = document.querySelectorAll(".js-tabs"),
+          l = document.querySelectorAll(".js-global-alert");
+
+    n.forEach((o) => {
+      try {
+        new r(o).init();
+      } catch (error) {
+        console.warn('nsw-ds-react: Error initializing search component:', error);
+      }
+    });
+
+    t.forEach((o) => {
+      try {
+        new r(o).init();
+      } catch (error) {
+        console.warn('nsw-ds-react: Error initializing close search component:', error);
+      }
+    });
+
+    try {
+      new m().init();
+    } catch (error) {
+      console.warn('nsw-ds-react: Error initializing navigation:', error);
+    }
+
+    e.forEach((o) => {
+      try {
+        new g(o).init();
+      } catch (error) {
+        console.warn('nsw-ds-react: Error initializing accordion:', error);
+      }
+    });
+
+    s.forEach((o) => {
+      try {
+        new k(o).init();
+      } catch (error) {
+        console.warn('nsw-ds-react: Error initializing dialog:', error);
+      }
+    });
+
+    i && i.forEach((o) => {
+      try {
+        new y(o).init();
+      } catch (error) {
+        console.warn('nsw-ds-react: Error initializing filters:', error);
+      }
+    });
+
+    a && a.forEach((o) => {
+      try {
+        new A(o).init();
+      } catch (error) {
+        console.warn('nsw-ds-react: Error initializing tabs:', error);
+      }
+    });
+
+    l && l.forEach((o) => {
+      try {
+        new w(o).init();
+      } catch (error) {
+        console.warn('nsw-ds-react: Error initializing global alert:', error);
+      }
+    });
+  } catch (error) {
+    console.warn('nsw-ds-react: Error during initialization:', error);
+  }
 }
 export {
   g as Accordion,
