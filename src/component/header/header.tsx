@@ -65,6 +65,8 @@ export const Header = (props: HeaderProps) => {
 	const refOpenSearchButton = useRef(null)
 	const refCloseSearchButton = useRef(null)
 
+	console.log("+++++++ I am changed")
+
 	useEffect(() => {
 		;(async () => {
 			try {
